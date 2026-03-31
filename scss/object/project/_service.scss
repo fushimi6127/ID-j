@@ -1,0 +1,262 @@
+@use "../../foundations/module" as *;
+
+// ========================================
+// Service セクション
+// ========================================
+.p-service {
+  position: relative;
+  background-color: $color-white;
+  overflow: clip;
+
+  &__bg {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 70vh;
+    padding: 12rem 4rem 8rem;
+    background-color: $color-white;
+
+    @include media("mobile") {
+      align-items: flex-start;
+      justify-content: flex-start;
+      min-height: 100svh;
+      padding: 15rem 1.6rem 6rem;
+    }
+  }
+
+  &__heading {
+    width: 100%;
+    max-width: 120rem;
+    margin: 0 auto;
+  }
+
+  // 共通パーツ準拠: PC 1.6rem / SP 1.4rem
+  &__lead {
+    max-width: 64rem;
+    margin-top: 4rem;
+    font-size: 1.6rem;
+    line-height: 2;
+    color: $txt-color;
+
+    @include media("mobile") {
+      max-width: 100%;
+      margin-top: 3rem;
+      font-size: 1.4rem;
+      line-height: 1.85;
+    }
+  }
+
+  &__cards {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 90%;
+    margin: 0 3rem 0 auto;
+    padding: 12rem 4rem 60rem;
+
+    @include media("mobile") {
+      max-width: 100%;
+      padding: 5rem 1.6rem 5rem;
+    }
+  }
+}
+
+// ========================================
+// Service card
+// ========================================
+.p-service-card {
+  position: relative;
+  max-width: 75rem;
+
+  opacity: 0;
+  filter: blur(8px);
+  transform: translate3d(0, 8rem, 0);
+  transition:
+    opacity 0.9s ease,
+    transform 1s cubic-bezier(0.22, 1, 0.36, 1),
+    filter 0.9s ease;
+
+  &.is-visible {
+    opacity: 1;
+    filter: blur(0);
+    transform: translate3d(0, 0, 0);
+  }
+
+  & + & {
+    margin-top: 16rem;
+
+    @include media("mobile") {
+      margin-top: 8rem;
+    }
+  }
+
+  &--right {
+    margin-left: auto;
+    margin-right: 0;
+  }
+
+  &--left {
+    margin-left: 0;
+    margin-right: auto;
+  }
+
+  @include media("mobile") {
+    max-width: 100%;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+
+  &__link {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    padding: 5.6rem 4.8rem;
+    min-height: 28rem;
+    justify-content: center;
+    color: inherit;
+    background-color: $color-white;
+    border-radius: 0.4rem;
+    box-shadow:
+      0 0.4rem 1.2rem rgba(0, 0, 0, 0.06),
+      0 0.8rem 2.4rem rgba(0, 0, 0, 0.1);
+    transition:
+      transform 0.15s cubic-bezier(0.4, 0, 0.2, 1),
+      box-shadow 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden;
+
+    @include media("mobile") {
+      padding: 4rem 2.4rem;
+      min-height: 22rem;
+    }
+
+    &:hover,
+    &:focus-visible {
+      transform: translateY(0.3rem);
+      box-shadow:
+        0 0.1rem 0.2rem rgba(0, 0, 0, 0.06),
+        0 0.2rem 0.6rem rgba(0, 0, 0, 0.08);
+    }
+
+    &:active {
+      transform: translateY(0.5rem);
+      box-shadow: 0 0.05rem 0.1rem rgba(0, 0, 0, 0.06);
+    }
+  }
+
+  &__number {
+    position: absolute;
+    top: 25%;
+    right: -0.5rem;
+    transform: translateY(-50%);
+    font-size: clamp(14rem, 18vw, 22rem);
+    font-weight: 900;
+    line-height: 1;
+    color: rgba(0, 0, 0, 0.06);
+    pointer-events: none;
+    user-select: none;
+
+    .p-service-card--left & {
+      right: auto;
+      left: -0.5rem;
+    }
+
+    @include media("mobile") {
+      font-size: clamp(10rem, 28vw, 16rem);
+      right: 0;
+
+      .p-service-card--left & {
+        left: 0;
+      }
+    }
+  }
+
+  &__content {
+    position: relative;
+    z-index: 1;
+  }
+
+  &__title-en {
+    margin: 0;
+    font-size: clamp(3.2rem, 4.5vw, 4.8rem);
+    font-weight: 900;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: $txt-color;
+  }
+
+  &__title-ja {
+    margin: 1.2rem 0 0;
+    font-size: clamp(1.4rem, 1.8vw, 1.8rem);
+    font-weight: 700;
+    line-height: 1.6;
+    color: $txt-color;
+  }
+
+  &__desc {
+    position: relative;
+    z-index: 1;
+    margin: 2rem 0 0;
+    font-size: 1.6rem;
+    line-height: 1.9;
+    color: $txt-light-color;
+
+    @include media("mobile") {
+      font-size: 1.3rem;
+      line-height: 1.8;
+    }
+  }
+
+  &__button {
+    position: relative;
+    z-index: 1;
+    display: inline-block;
+    margin-top: 2.4rem;
+
+    @include media("mobile") {
+      margin-top: 2rem;
+      display: block;
+      width: 100%;
+      text-align: right;
+    }
+  }
+
+  &--right &__link {
+    align-items: flex-end;
+    text-align: right;
+  }
+
+  &--right &__content,
+  &--right &__desc {
+    text-align: right;
+  }
+
+  &--left &__link {
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  &--left &__content,
+  &--left &__desc {
+    text-align: left;
+  }
+
+  @include media("mobile") {
+    &--right &__link,
+    &--left &__link {
+      // align-items: center;
+      // text-align: center;
+    }
+
+    &--right &__content,
+    &--left &__content,
+    &--right &__desc,
+    &--left &__desc {
+      text-align: left;
+      display: block;
+      width: 100%;
+    }
+  }
+}

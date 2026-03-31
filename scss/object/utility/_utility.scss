@@ -1,0 +1,16 @@
+@use "../../foundations/module" as *;
+
+.line {
+  &-right {
+    &--gray {
+      border-right: 1px solid rgba($txt-color, 0.15);
+    }
+  }
+
+  &-under {
+    &--gray {
+      border-bottom: 1px solid rgba($txt-color, 0.15);
+      margin-bottom: 1.6rem;
+    }
+  }
+}

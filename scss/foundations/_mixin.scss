@@ -1,0 +1,99 @@
+@use "sass:map";
+
+// ----------------------------------------
+// ブレークポイント定義
+// ----------------------------------------
+// 注意: mobile(max 767px) と mobile-up(min 767px〜) は
+// 767px で境界が重複するため、実装時は排他的に使用すること
+
+$breakpoints: (
+  "mobile":        "screen and (max-width: 767px)",
+  "mobile-up":     "screen and (min-width: 768px) and (max-width: 896px)",
+  "mobile-large":  "screen and (min-width: 499px) and (max-width: 767px)",
+  "mobile-small":  "screen and (max-width: 498px)",
+  "tablet":        "screen and (min-width: 768px) and (max-width: 1024px)",
+  "content":       "screen and (max-width: 1100px)",
+  "menu-fit":      "screen and (max-width: 1320px)",
+  "top":           "screen and (max-width: 1247px)",
+  "pc":            "screen and (min-width: 1025px)",
+  "print":         "print"
+) !default;
+
+// ----------------------------------------
+// メディアクエリ mixin
+// ----------------------------------------
+
+@mixin media($breakpoint) {
+  @media #{map.get($breakpoints, $breakpoint)} {
+    @content;
+  }
+}
+
+// ----------------------------------------
+// 位置決め mixin
+// ----------------------------------------
+
+// ど真ん中 (親に position: relative 必須)
+// 例: @include box_center();
+@mixin box_center($top: 50%, $left: 50%) {
+  position: absolute;
+  top: $top;
+  left: $left;
+  transform: translate(-50%, -50%);
+}
+
+// 水平中央
+// 例: @include x_center(top, 20px);
+@mixin x_center($side: top, $pos: 0) {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+
+  @if $side == top {
+    top: $pos;
+  } @else if $side == bottom {
+    bottom: $pos;
+  }
+}
+
+// 垂直中央
+// 例: @include y_center(right, 20px);
+@mixin y_center($side: left, $pos: 50%) {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+
+  @if $side == left {
+    left: $pos;
+  } @else if $side == right {
+    right: $pos;
+  }
+}
+
+// マージンで水平中央
+@mixin m_center {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+// ----------------------------------------
+// コンテナ幅 mixin
+// ----------------------------------------
+
+@mixin wrapper {
+  width: 100%;
+  max-width: 1100px;
+  padding-left: 16px;
+  padding-right: 16px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@mixin wrapper-top {
+  width: 100%;
+  max-width: 1248px;
+  padding-left: 16px;
+  padding-right: 16px;
+  margin-left: auto;
+  margin-right: auto;
+}

@@ -1,0 +1,11 @@
+@use "../../foundations/module" as *;
+
+// ========================================
+// Common Utilities
+// ========================================
+
+// roadmap price notes
+// _cursor.scss から移動
+ul.p-roadmap__price-notes {
+  font-size: 1.2rem;
+}

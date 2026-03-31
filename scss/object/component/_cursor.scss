@@ -1,0 +1,78 @@
+@use "../../foundations/module" as *;
+
+// ========================================
+// Custom Cursor
+// lerp追従 + mix-blend-mode: difference
+// ホバー時に拡大 + テキスト表示
+// SP (≤767px) では非表示
+// ========================================
+
+.c-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #fff;
+  pointer-events: none;
+  z-index: 9999;
+  mix-blend-mode: difference;
+  will-change: transform;
+  transition:
+    width 0.4s cubic-bezier(0.23, 1, 0.32, 1),
+    height 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+
+  &.is-hover {
+    width: 72px;
+    height: 72px;
+  }
+
+  &.is-view {
+    width: 100px;
+    height: 100px;
+  }
+
+  &__text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 1.1rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    color: #000;
+    white-space: nowrap;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+    mix-blend-mode: difference;
+  }
+
+  &.is-view &__text {
+    opacity: 1;
+  }
+
+  @include media("mobile") {
+    display: none;
+  }
+}
+
+// ========================================
+// Body / anchor cursor override
+// ========================================
+body {
+  cursor: none;
+
+  @include media("mobile") {
+    cursor: auto;
+  }
+}
+
+a {
+  cursor: none;
+
+  @include media("mobile") {
+    cursor: pointer;
+  }
+}

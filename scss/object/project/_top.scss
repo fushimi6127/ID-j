@@ -1,0 +1,122 @@
+// 【_top.scss 単体には .css は出ません】まとめて css/style.css に出力されます。
+// 手動ビルド: cd ID-j → npm run build:css
+// 見た目が変わらないとき: ブラウザを強制再読込（Cmd+Shift+R）／ HTML は css/style.css を読んでいるか確認
+@use "../../foundations/module" as *;
+
+/* =========================================
+   Mainvisual
+========================================= */
+.p-mainvisual {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100svh;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  background: $color-white;
+  overflow: hidden;
+}
+
+.p-mainvisual__inner {
+  position: relative;
+  width: 60%;
+  margin: 0 auto;
+  padding: 0 4rem 8rem;
+  text-align: right;
+
+  @include media("mobile") {
+    width: 100%;
+    padding: 0 2rem 6rem;
+  }
+}
+
+.p-mainvisual__lead-image {
+  margin: 0 0 2.4rem;
+  opacity: 0;
+  animation: mvFadeIn 1.2s ease 0.4s forwards;
+
+  img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+}
+
+.p-mainvisual__image {
+  margin: 0;
+  opacity: 0;
+  animation: mvFadeIn 1.2s ease 0.8s forwards;
+
+  img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+}
+
+@keyframes mvFadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.p-mainvisual__scroll-hint {
+  position: fixed;
+  bottom: 15rem;
+  right: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.2rem;
+  opacity: 0;
+  animation: mvFadeIn 1s ease 1.4s forwards;
+  transition: opacity 0.4s ease;
+  z-index: 999;
+
+  &.is-hidden {
+    opacity: 0 !important;
+    pointer-events: none;
+  }
+
+  @include media("mobile") {
+    right: 0.3rem;
+    bottom: 9rem;
+  }
+}
+
+.p-mainvisual__scroll-text {
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: $color-black;
+  writing-mode: vertical-rl;
+}
+
+.p-mainvisual__scroll-line {
+  display: block;
+  width: 0.1rem;
+  height: 6rem;
+  background: $color-black;
+  transform-origin: top center;
+  animation: scrollLine 1.8s ease-in-out 2s infinite;
+
+  @include media("mobile") {
+    height: 4rem;
+  }
+}
+
+@keyframes scrollLine {
+  0% {
+    transform: scaleY(0);
+    opacity: 1;
+  }
+  60% {
+    transform: scaleY(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scaleY(1);
+    opacity: 0;
+  }
+}

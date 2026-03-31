@@ -1,0 +1,22 @@
+@use "../../foundations/module" as *;
+
+// 文字の位置
+.txt_left {
+  text-align: left;
+}
+.txt_center {
+  text-align: center;
+}
+.txt_right {
+  text-align: right;
+}
+
+// 文字サイズ
+.txt_small {
+  font-size: 80%;
+}
+
+// 文字色
+.txt_color {
+  color: $txt-color;
+}

@@ -1,0 +1,861 @@
+@use "../../foundations/module" as *;
+
+// ========================================
+// Import Intro セクション
+// ========================================
+.p-import-intro {
+  position: relative;
+  background-color: $color-white;
+  overflow: clip;
+
+  // -----------------------------------------
+  // 見出しエリア
+  // -----------------------------------------
+  &__bg {
+    position: relative;
+    top: 25%;
+    left: 50%;
+    transform: translate(-50%, 25%);
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    background-color: $color-white;
+
+    @include media("mobile") {
+      position: relative;
+    top: 8%;
+    left: 50%;
+    transform: translate(-50%, 8%);
+      align-items: flex-start;
+      // min-height: 50svh;
+      padding: 5rem 0 0rem;
+    }
+  }
+
+  &__heading {
+    width: 100%;
+  }
+
+  // -----------------------------------------
+  // ボディテキストエリア
+  // スクロール量で sticky が外れる＝次セクションへ
+  // padding-bottom でそのタイミングを調整
+  // -----------------------------------------
+  &__cards {
+    position: relative;
+    z-index: 2;
+    padding: 5rem 0 20rem;
+
+    @include media("mobile") {
+      padding: 0rem 0 0rem;
+    }
+  }
+
+  // -----------------------------------------
+  // ボディテキスト：浮き上がりアニメーション（PC は .is-visible で完了）
+  // -----------------------------------------
+  &__body {
+    max-width: 72rem;
+    margin: 0 0 0 auto;
+    position: relative;
+    z-index: 30;
+    padding: 5.6rem 2.8rem;
+    // background-color: color-mix(in srgb, #fff 72%, transparent);
+    // box-shadow: 0 0.4rem 1.2rem rgba(0, 0, 0, 0.06), 0 0.8rem 2.4rem rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    opacity: 0;
+    filter: blur(8px);
+    transform: translate3d(0, 8rem, 0);
+    transition:
+      opacity 0.9s ease,
+      transform 1s cubic-bezier(0.22, 1, 0.36, 1),
+      filter 0.9s ease;
+
+    &.is-visible {
+      opacity: 1;
+      filter: blur(0);
+      transform: translate3d(0, 0, 0);
+    }
+
+    // SP: IntersectionObserver を付けない前提で、常に表示（親の opacity:0 を上書き）
+    @include media("mobile") {
+      opacity: 1;
+      filter: none;
+      transform: none;
+      transition: none;
+      box-shadow: none;
+      padding: 0;
+      margin: 10rem 0 0 auto;
+    }
+
+    p {
+      font-size: 1.6rem;
+      line-height: 2;
+      color: $txt-light-color;
+
+      & + p {
+        margin-top: 2.4rem;
+      }
+
+      @include media("mobile") {
+        font-size: 1.4rem;
+        line-height: 1.85;
+      }
+    }
+  }
+}
+
+/* ============================================
+  why
+============================================ */
+section#import-why {
+    margin-top: 5rem;
+}
+.p-import-why__category-block {
+  margin-top: 8rem;
+
+  @include media("mobile") {
+    margin-top: 6rem;
+  }
+}
+
+.p-import-why__category-head {
+  display: flex;
+  gap: 3rem;
+  margin-bottom: 4.8rem;
+
+  @include media("mobile") {
+    display: block;
+    margin-bottom: 3.2rem;
+  }
+}
+
+.p-import-why__category-head-main {
+  display: flex;
+  align-items: center;
+  gap: 1.6rem;
+  margin-bottom: 1.6rem;
+}
+
+.p-import-why__category-line {
+  display: inline-block;
+  width: 4.8rem;
+  height: 0.2rem;
+  background: $color-black;
+}
+
+.p-import-why__category-eyebrow {
+  font-size: clamp(1.1rem, calc(11 / 1440 * 100vw), 1.4rem);
+  font-weight: 900;
+  line-height: 1.4;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: $color-black;
+}
+
+.p-import-why__category-title {
+  font-size: 3.6rem;
+  font-weight: 900;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+}
+
+.p-import-why__category-index {
+  flex-shrink: 0;
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.45em;
+  color: rgba(#000, 0.2);
+  text-transform: uppercase;
+  transform: rotate(90deg);
+  transform-origin: bottom right;
+
+  @include media("mobile") {
+    display: none;
+  }
+}
+
+/* ============================================
+  category cards
+============================================ */
+.p-import-category {
+  position: relative;
+  z-index: 999;
+
+  // フォーカスリングを付けない（キーボード含む）
+  *:focus {
+    outline: none;
+  }
+
+  *:focus-visible {
+    outline: none;
+  }
+}
+
+.p-import-category__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.1rem;
+  border: 0.1rem solid rgba(#000, 0.08);
+  background: rgba(#000, 0.08);
+
+  @include media("content") {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @include media("mobile") {
+    grid-template-columns: 1fr;
+  }
+}
+
+.p-import-category__card {
+  position: relative;
+  overflow: hidden;
+  min-height: 52rem;
+  padding: 4rem;
+  background: $color-white;
+  transition:
+    box-shadow 0.6s ease,
+    background-color 0.6s ease;
+
+  @include media("content") {
+    min-height: 46rem;
+    padding: 3.6rem 3rem;
+  }
+
+  @include media("mobile") {
+    min-height: auto;
+    padding: 3rem 2.4rem;
+  }
+
+  &::after {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 0.4rem;
+    background: $txt-lighter-color;
+    content: "";
+    transition: width 0.6s ease;
+  }
+
+  &:hover,
+  &.is-active {
+    box-shadow: 0 2rem 5rem rgba(#000, 0.08);
+
+    &::after {
+      width: 100%;
+    }
+
+    .p-import-category__icon {
+      border-color: $txt-lighter-color;
+      background: $txt-lighter-color;
+      transform: rotate(90deg);
+    }
+
+    .p-import-category__icon-line {
+      background: $color-white;
+    }
+
+    .p-import-category__number {
+      transform: translateY(-0.8rem);
+    }
+
+    .p-import-category__item::before {
+      opacity: 1;
+    }
+
+    .p-import-category__more {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+.p-import-category__number {
+  position: absolute;
+  top: -2.4rem;
+  right: -1rem;
+  font-size: clamp(11rem, calc(120 / 1440 * 100vw), 12rem);
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  color: rgba(#000, 0.03);
+  pointer-events: none;
+  transition: transform 0.8s ease;
+}
+
+.p-import-category__inner {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.p-import-category__head {
+  margin-bottom: 4rem;
+
+  @include media("mobile") {
+    margin-bottom: 3rem;
+  }
+}
+
+.p-import-category__icon {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 3.2rem;
+  height: 3.2rem;
+  margin-bottom: 2.4rem;
+  border: 0.1rem solid rgba(#000, 0.12);
+  border-radius: 50%;
+  transition:
+    background-color 0.5s ease,
+    border-color 0.5s ease,
+    transform 0.5s ease;
+}
+
+.p-import-category__icon-line {
+  position: absolute;
+  display: block;
+  background: rgba(#000, 0.35);
+  transition: background-color 0.5s ease;
+}
+
+.p-import-category__icon-line--x {
+  width: 1.4rem;
+  height: 0.1rem;
+}
+
+.p-import-category__icon-line--y {
+  width: 0.1rem;
+  height: 1.4rem;
+}
+
+.p-import-category__title {
+  margin-bottom: 1rem;
+  font-size: clamp(2.2rem, calc(32 / 1440 * 100vw), 3.2rem);
+  font-weight: 900;
+  line-height: 1.25;
+  letter-spacing: -0.03em;
+}
+
+.p-import-category__sub {
+  font-size: clamp(1.1rem, calc(10 / 1440 * 100vw), 1.4rem);
+  font-weight: 800;
+  line-height: 1.7;
+  letter-spacing: 0.18em;
+  color: rgba(#000, 0.6);
+  text-transform: uppercase;
+  opacity: 0.75;
+}
+
+.p-import-category__desc {
+  min-height: 8em;
+  margin-bottom: 4rem;
+  font-size: clamp(1.4rem, calc(14 / 1440 * 100vw), 1.5rem);
+  line-height: 2;
+
+  @include media("mobile") {
+    min-height: auto;
+    margin-bottom: 3rem;
+  }
+}
+
+.p-import-category__foot {
+  // margin-top: auto;
+  padding-top: 3rem;
+  border-top: 0.1rem solid rgba(#000, 0.08);
+}
+
+.p-import-category__list {
+  display: grid;
+  gap: 1.2rem;
+}
+
+.p-import-category__item {
+  position: relative;
+  padding-left: 1.8rem;
+  font-size: clamp(1.4rem, calc(16/ 1440 * 100vw), 1.6rem);
+  font-weight: 700;
+  line-height: 1.8;
+  transition: color 0.4s ease;
+
+  &::before {
+    position: absolute;
+    top: 0.95rem;
+    left: 0;
+    width: 0.6rem;
+    height: 0.6rem;
+    border-radius: 50%;
+    background: $txt-lighter-color;
+    content: "";
+    opacity: 0;
+    transition: opacity 0.4s ease;
+  }
+}
+
+.p-import-category__more {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin-top: 3rem;
+  font-size: 1rem;
+  font-weight: 900;
+  line-height: 1.4;
+  letter-spacing: 0.22em;
+  color: $txt-lighter-color;
+  text-transform: uppercase;
+  opacity: 0;
+  transform: translateY(1.2rem);
+  transition:
+    opacity 0.5s ease,
+    transform 0.5s ease;
+}
+
+.p-import-category__arrow {
+  position: relative;
+  display: inline-block;
+  width: 1.2rem;
+  height: 1.2rem;
+
+  &::before,
+  &::after {
+    position: absolute;
+    content: "";
+  }
+
+  &::before {
+    top: 50%;
+    left: 0;
+    width: 1rem;
+    height: 0.1rem;
+    background: $txt-lighter-color;
+    transform: translateY(-50%);
+  }
+
+  &::after {
+    top: 50%;
+    right: 0.1rem;
+    width: 0.6rem;
+    height: 0.6rem;
+    border-top: 0.1rem solid $txt-lighter-color;
+    border-right: 0.1rem solid $txt-lighter-color;
+    transform: translateY(-50%) rotate(45deg);
+  }
+}
+
+.p-import-category__bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  margin-top: 2.4rem;
+  opacity: 0.12;
+
+  @include media("mobile") {
+    display: block;
+    margin-top: 2rem;
+  }
+}
+
+.p-import-category__bottom-text {
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.4;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+
+  @include media("mobile") {
+    & + & {
+      margin-top: 1rem;
+    }
+  }
+}
+
+/* ============================================
+  old flow / model base
+============================================ */
+.p-import-flow__grid,
+.p-import-model__grid {
+  display: grid;
+}
+
+.p-import-flow__grid {
+  grid-template-columns: repeat(3, 1fr);
+
+  @media screen and (max-width: 1024px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.p-import-model__grid {
+  grid-template-columns: repeat(2, 1fr);
+
+  @include media("mobile") {
+    grid-template-columns: 1fr;
+  }
+}
+
+.p-import-flow__card,
+.p-import-model__card {
+  padding: 3.2rem;
+  border: 0.1rem solid rgba(#000, 0.08);
+  background: $color-white;
+
+  @include media("mobile") {
+    padding: 2.4rem;
+  }
+}
+
+.p-import-flow__phase-number {
+  display: inline-block;
+  margin-bottom: 1.2rem;
+  font-size: clamp(1.4rem, calc(14 / 1440 * 100vw), 1.4rem);
+  font-weight: 900;
+  line-height: 1.4;
+  letter-spacing: 0.16em;
+  color: $color-black;
+  text-transform: uppercase;
+}
+
+.p-import-flow__phase-title,
+.p-import-model__card-title {
+  font-size: clamp(2rem, calc(26 / 1440 * 100vw), 2.6rem);
+  font-weight: 800;
+  line-height: 1.4;
+}
+
+.p-import-flow__phase-title span,
+.p-import-model__card-sub {
+  display: block;
+  margin-top: 0.8rem;
+  font-size: clamp(1.4rem, calc(14 / 1440 * 100vw), 1.4rem);
+  font-weight: 700;
+  line-height: 1.7;
+  letter-spacing: 0.08em;
+  color: rgba(#000, 0.6);
+}
+
+.p-import-flow__desc,
+.p-import-flow__content-text,
+.p-import-model__card-text,
+.p-import-model__card-price,
+.p-import-flow__deliverables li {
+  font-size: clamp(1.4rem, calc(15 / 1440 * 100vw), 1.5rem);
+  line-height: 2;
+  color: $txt-color;
+}
+
+.p-import-flow__content {
+  margin-top: 2rem;
+}
+
+.p-import-flow__content-title {
+  margin-bottom: 0.8rem;
+  font-size: clamp(1.6rem, calc(16 / 1440 * 100vw), 1.6rem);
+  font-weight: 700;
+  line-height: 1.6;
+}
+
+.p-import-flow__deliverables {
+  display: grid;
+  gap: 0.4rem;
+//   padding-left: 1.6rem;
+  list-style: disc;
+}
+
+.p-import-model {
+  padding: 12rem 0;
+
+  @media screen and (max-width: 1024px) {
+    padding: 10rem 0;
+  }
+
+  @include media("mobile") {
+    padding: 8rem 0;
+  }
+}
+
+.p-import-model__lead {
+  width: 100%;
+  max-width: 92rem;
+  margin-bottom: 4rem;
+
+  p {
+    font-size: clamp(1.4rem, calc(16 / 1440 * 100vw), 1.6rem);
+    line-height: 2;
+    color: $txt-color;
+  }
+}
+
+.p-import-model__card-price {
+  margin-top: 2rem;
+  font-weight: 800;
+  color: $color-black;
+}
+
+/* ============================================
+  new service flow visual
+============================================ */
+$import-flow-arrow-depth: 5%; // SP：下向きシェブロンの先端の高さ（下端から）
+
+.p-import-flow {
+  padding: 12rem 0;
+  background: $color-white;
+
+  @media screen and (max-width: 1024px) {
+    padding: 10rem 0;
+  }
+
+  @include media("mobile") {
+    padding: 8rem 0;
+  }
+}
+
+.p-import-flow__head {
+  margin-bottom: 6.4rem;
+
+  @include media("mobile") {
+    margin-bottom: 4rem;
+  }
+}
+
+.p-import-flow__heading-block {
+  position: static;
+  margin-bottom: 0;
+}
+
+.p-import-flow__sub-en {
+  margin-top: 1.6rem;
+  color: rgba(#000, 0.45);
+  font-size: clamp(1.2rem, calc(12 / 1440 * 100vw), 1.4rem);
+  font-weight: 700;
+  line-height: 1.6;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+.p-import-flow__list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: auto auto auto auto 1fr auto auto;
+  width: 100%;
+  position: relative;
+  z-index: 999;
+
+  @include media("mobile") {
+    display: block;
+  }
+}
+
+.p-import-flow__phase {
+  position: relative;
+  display: grid;
+  grid-row: span 7;
+  grid-template-rows: subgrid;
+  flex: 1 1 0;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(2.4rem);
+  transition:
+    opacity 1s ease,
+    transform 1s ease;
+
+  &:nth-child(2) {
+    transition-delay: 0.2s;
+  }
+
+  &:nth-child(3) {
+    transition-delay: 0.4s;
+  }
+
+  &.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  @media screen and (min-width: 768px) {
+    transform: translateX(-3rem);
+
+    &:not(:first-child) {
+      margin-left: -2%;
+    }
+
+    &.is-visible {
+      transform: translateX(0);
+    }
+  }
+
+  @include media("mobile") {
+    display: block;
+    grid-row: auto;
+    grid-template-rows: none;
+
+    & + & {
+      margin-top: 0.2rem;
+    }
+  }
+}
+
+.p-import-flow__phase-bg {
+  position: absolute;
+  inset: 0;
+  background: #f5f5f5;
+  transition: transform 0.6s ease;
+
+  // PC：横並び・右向き矢印
+  @media screen and (min-width: 768px) {
+    .p-import-flow__phase--01 & {
+      clip-path: polygon(0% 0%, 90% 0%, 100% 50%, 90% 100%, 0% 100%);
+    }
+
+    .p-import-flow__phase--02 & {
+      clip-path: polygon(90% 0%, 100% 50%, 90% 100%, 0% 100%, 10% 50%, 0% 0%);
+    }
+
+    .p-import-flow__phase--03 & {
+      clip-path: polygon(90% 0%, 100% 50%, 90% 100%, 0% 100%, 10% 50%, 0% 0%);
+    }
+  }
+
+  // SP：縦並び・下向きシェブロン
+  @include media("mobile") {
+    .p-import-flow__phase--01 &,
+    .p-import-flow__phase--02 & {
+      clip-path: polygon(
+        0% 0%,
+        100% 0%,
+        100% calc(100% - #{$import-flow-arrow-depth}),
+        50% 100%,
+        0% calc(100% - #{$import-flow-arrow-depth})
+      );
+    }
+
+    .p-import-flow__phase--03 & {
+      clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
+    }
+  }
+}
+
+.p-import-flow__phase-inner {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-row: span 7;
+  grid-template-rows: subgrid;
+  min-height: 56rem;
+  padding: 4rem 3.2rem;
+  color: $color-gray-dark;
+
+  @media screen and (max-width: 1200px) {
+    min-height: 52rem;
+    padding: 3.2rem 2.4rem;
+  }
+
+  @include media("mobile") {
+    display: block;
+    grid-row: auto;
+    grid-template-rows: none;
+    min-height: auto;
+    padding: 3rem 2rem;
+
+    .p-import-flow__phase--01 &,
+    .p-import-flow__phase--02 & {
+      padding-bottom: calc(3rem + 3rem);
+    }
+  }
+}
+.p-import-flow__section-label {
+  margin: 0 0  1.2rem 1.2rem;
+  font-size: 1.4rem;
+  font-weight: 900;
+  line-height: 1.4;
+  letter-spacing: 0.22em;
+  color: rgba(#000, 0.35);
+  text-transform: uppercase;
+
+  @include media("mobile") {
+    margin-top: 2.4rem;
+  }
+}
+.p-import-flow__phase-title {
+  margin: 0 0 1.6rem;
+  color: $color-black;
+  font-size: clamp(2.8rem, calc(32 / 1440 * 100vw), 3.2rem);
+  font-weight: 900;
+  line-height: 1.2;
+  letter-spacing: -0.03em;
+}
+
+.p-import-flow__phase-text {
+  margin: 0 0 3.2rem;
+  color: rgba(#000, 0.62);
+  font-size: clamp(1.4rem, calc(15 / 1440 * 100vw), 1.5rem);
+  font-weight: 500;
+  line-height: 1.9;
+}
+
+.p-import-flow__task-list {
+  display: grid;
+  gap: 1.2rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+      padding-bottom: 2rem;
+}
+
+.p-import-flow__task-item {
+  position: relative;
+  padding-left: 2rem;
+  color: rgba(#000, 0.8);
+  font-size:2rem;
+  font-weight: 700;
+  line-height: 1.8;
+  @include media("mobile") {
+    font-size:1.6rem;
+  }
+
+}
+
+.p-import-flow__deliverables {
+    width: 90%;
+  gap: 0.8rem;
+  padding-top: 3.2rem;
+  border-top: 0.1rem solid rgba(#000, 0.12);
+  align-self: self-start;
+  margin-left: 2%;
+
+  @include media("mobile") {
+    margin-top: auto;
+  }
+}
+
+.p-import-flow__deliverable-item {
+    display: block;
+
+  align-items: center;
+  padding: 0.8rem 1.2rem;
+  border: 0.1rem solid rgba(#000, 0.14);
+//   border-radius: 9999px;
+  background: rgba(#000, 0.04);
+  color: $color-black;
+  font-size: 1.8rem;
+  font-weight: 700;
+  line-height: 1.5;
+  letter-spacing: 0.04em;
+
+  @include media("mobile") {
+    width: 100%;
+
+  }
+}
+
+.p-import-why__body {
+  @include media("mobile") {
+  margin-top: 5rem;
+}
+}

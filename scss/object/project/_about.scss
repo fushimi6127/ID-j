@@ -1,0 +1,296 @@
+@use "../../foundations/module" as *;
+
+// =========================================
+// p-about
+// About セクション固有スタイル
+// =========================================
+.p-about {
+  position: relative;
+  overflow: visible;
+  padding: 15rem 0;
+  color: $color-white;
+  background-image: url("../img/project/about/about-back.png");
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  // fixed だと WebKit 系で子の position:sticky が効かないことがある（見出しは .matrix 内で sticky）
+  background-attachment: scroll;
+  transform-origin: center center;
+
+  .l-inner {
+    overflow: visible;
+  }
+
+  // -----------------------------------------
+  // Heading
+  // -----------------------------------------
+  &__heading {
+    position: relative;
+    // top: 8rem;
+    z-index: 3;
+    margin-bottom: 2rem;
+  }
+
+  // -----------------------------------------
+  // Glass panel
+  // -----------------------------------------
+  &__glass {
+    position: relative;
+    z-index: 7;
+    padding: 4rem;
+    text-align: right;
+    text-shadow: 2px 2px 2px rgba(48, 48, 48, 1);
+    background: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(20px);
+
+    @include media("mobile") {
+      width: 100%;
+      text-align: right;
+    }
+  }
+
+  // -----------------------------------------
+  // Optional image blocks
+  // -----------------------------------------
+  &__sublead-image {
+    img {
+      display: block;
+      width: 100%;
+      max-width: 100rem;
+      height: auto;
+      margin: 0 auto 6rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid $color-white;
+    }
+  }
+
+  &__catch-image {
+    img {
+      display: block;
+      width: 100%;
+      max-width: 100rem;
+      height: auto;
+      margin: 0 auto 3.6rem;
+    }
+  }
+
+  // -----------------------------------------
+  // Text
+  // -----------------------------------------
+  &__text {
+    font-size: 2rem;
+    line-height: 1.9;
+    text-align: justify;
+    margin-top: 3rem;
+
+    p {
+      margin-bottom: 1.5rem;
+      font-size: 2rem;
+      line-height: 2;
+      letter-spacing: 0.02em;
+      text-align: left;
+
+      & + p {
+        margin-top: 1.2em;
+      }
+    }
+  }
+
+  &__heading.c-heading-block {
+    > .matrix__wrap:first-child .c-heading {
+      margin-top: 0;
+    }
+
+    > .l-inner--narrow {
+      margin-top: clamp(2rem, 3vw, 3.2rem);
+      max-width: 75rem;
+      margin-left: auto;
+      margin-right: 0;
+
+      @include media("mobile") {
+        max-width: 100%;
+        margin-top: 1.6rem;
+      }
+
+      > .p-about__text {
+        margin-top: 0;
+      }
+    }
+
+    .p-about__text.p-about__glass {
+      margin-top: 0;
+
+      > .matrix__wrap:first-child .c-heading {
+        margin-top: 0;
+      }
+
+      > .l-inner--narrow {
+        margin-top: clamp(2rem, 3vw, 3.2rem);
+        max-width: 75rem;
+        margin-left: auto;
+        margin-right: 0;
+
+        @include media("mobile") {
+          max-width: 100%;
+          margin-top: 1.6rem;
+        }
+
+        > .p-about__text {
+          margin-top: 0;
+        }
+      }
+    }
+  }
+
+  // -----------------------------------------
+  // Philosophy
+  // -----------------------------------------
+  &__philosophy {
+    position: relative;
+    text-align: left;
+  }
+
+  &__philosophy-outer {
+    margin-top: clamp(4rem, 6vw, 10rem);
+  }
+
+  &__philosophy-title {
+    display: inline-block;
+    margin-bottom: 2rem;
+    font-size: 2.8rem;
+    font-weight: bold;
+    border-bottom: 1px solid $color-white;
+  }
+
+  &__philosophy-logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 3rem;
+    gap: 1rem;
+
+    img {
+      width: 100%;
+      max-width: 25rem;
+      height: auto;
+      @include media("mobile") {
+        max-width: 13rem;
+      }
+    }
+
+    .p-about__philosophy-tagline {
+      font-size: 3rem;
+      font-weight: bold;
+    }
+  }
+
+  &__philosophy-text {
+    font-size: 1.4rem;
+    line-height: 1.8;
+
+    p {
+      margin-bottom: 1.4rem;
+    }
+  }
+
+  // -----------------------------------------
+  // More link
+  // -----------------------------------------
+  &__more {
+    margin-top: 2.4rem;
+    text-align: right;
+
+    .c-button--more {
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: $color-white;
+
+      span {
+        margin-left: 0.6rem;
+        font-size: 1.4rem;
+      }
+
+      &:hover {
+        opacity: 0.7;
+      }
+    }
+  }
+
+  // -----------------------------------------
+  // Button
+  // -----------------------------------------
+  &__button {
+    display: block;
+    width: fit-content;
+    margin-left: auto;
+    margin-right: 0;
+    margin-top: 3rem;
+  }
+
+  // -----------------------------------------
+  // Mobile
+  // -----------------------------------------
+  @include media("mobile") {
+    padding: 6rem 1.6rem;
+
+    &__heading {
+      top: 3rem;
+      margin-bottom: 2.4rem;
+    }
+
+    &__text {
+      font-size: 1.4rem;
+      line-height: 1.85;
+      padding: 2rem 1rem;
+      p {
+        margin-bottom: 1.2rem;
+        font-size: 1.4rem;
+        line-height: 1.9;
+      }
+    }
+
+    &__philosophy-title {
+      font-size: 2.2rem;
+    }
+
+    &__philosophy-logo {
+      // flex-direction: column;
+      align-items: center;
+      gap: 1.6rem;
+
+      .p-about__philosophy-tagline {
+        font-size: 2.4rem;
+      }
+    }
+
+    &__philosophy-text {
+      font-size: 1.4rem;
+      line-height: 1.8;
+    }
+
+    &__philosophy-image {
+      margin: 6rem 0;
+    }
+
+    &__more {
+      margin-top: 3rem;
+      text-align: center;
+    }
+
+    &__button {
+      // margin-right: auto;
+      margin-left: auto;
+    }
+  }
+}
+
+// =========================================
+// Safari fixed background fallback
+// =========================================
+@supports (-webkit-touch-callout: none) {
+  .p-about {
+    background-attachment: scroll;
+  }
+}

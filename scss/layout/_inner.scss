@@ -1,0 +1,12 @@
+@use "../foundations/module" as *;
+
+.l-inner {
+  max-width: 120rem;
+  margin: 0 auto;
+  text-align: left;
+
+  &.l-inner--narrow {
+    max-width: 75rem;
+    margin: 0 0 0 auto;
+  }
+}

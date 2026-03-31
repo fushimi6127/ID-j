@@ -1,0 +1,278 @@
+@use "../../foundations/module" as *;
+
+// =========================================
+// p-about-detail
+// About 下層ページ：図解アニメーション
+// =========================================
+
+// -----------------------------------------
+// l-inner--narrow 上書き（About 下層のみ）
+// -----------------------------------------
+.p-about .l-inner--narrow {
+  max-width: 120rem;
+  margin: 0 auto;
+}
+
+// -----------------------------------------
+// glass パネル上書き（About 下層のみ）※図解は PC のみ表示
+// -----------------------------------------
+.p-about .p-about__glass .p-about-detail__diagram {
+  text-shadow: none;
+  text-align: left;
+}
+
+// -----------------------------------------
+// SP 専用：静的 SVG（PC では非表示）
+// -----------------------------------------
+.p-about-detail__diagram-sp {
+  display: none;
+  margin: 0 auto;
+  max-width: 100%;
+
+  @include media("mobile") {
+    display: block;
+  }
+
+  img {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+// -----------------------------------------
+// コンテナ（PC：グリッド図解 + アニメーション）
+// -----------------------------------------
+.p-about-detail__diagram {
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  grid-template-rows: auto auto auto;
+  column-gap: 0;
+  row-gap: 0;
+  align-items: center;
+
+  @include media("mobile") {
+    display: none !important;
+  }
+}
+
+// -----------------------------------------
+// ① 中央矢印＋ロゴ
+// -----------------------------------------
+.p-about-detail__center-arrow {
+  grid-column: 1 / 4;
+  grid-row: 1 / 2;
+  position: relative;
+  z-index: 1;
+  will-change: clip-path;
+
+  img:first-child {
+    display: block;
+    width: 48%;
+    height: auto;
+    margin: 0 auto;
+  }
+
+  // [Fix] ロゴは親の clip-path に追従するが opacity を個別制御
+  //       矢印の展開（1s）が終わってからフェードインさせる
+  .p-about-detail__center-logo {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 26rem;
+    height: auto;
+    opacity: 0;
+    transition: opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.8s;
+    @include media("tablet") {
+      width: 20rem;
+    }
+
+  }
+
+  clip-path: inset(0 50% 0 50%);
+  transition: clip-path 1s cubic-bezier(0.22, 1, 0.36, 1);
+
+  &.is-active {
+    clip-path: inset(0 0% 0 0%);
+
+    .p-about-detail__center-logo {
+      opacity: 1;
+    }
+  }
+}
+
+// -----------------------------------------
+// ② Starting Point ラベル
+// -----------------------------------------
+.p-about-detail__label-start {
+  grid-column: 2 / 3;
+  grid-row: 1 / 2;
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  align-self: start;
+  padding-top: 3rem;
+  @include media("tablet") {
+    padding-top: 1rem;
+  }
+  span {
+    display: inline-block;
+    color: $color-white;
+    // font-family: 'Zen Kaku Gothic New', sans-serif;
+    // 1440px 時 3.2rem 相当の比率を維持して流動的に
+    font-size: clamp(2rem, calc(32 / 1440 * 100vw), 3.2rem);
+    font-weight:700;
+    line-height: 1;
+    margin: 0 auto;
+  }
+}
+
+// -----------------------------------------
+// ③ Hub リスト
+// -----------------------------------------
+.p-about-detail__label-hub {
+  grid-column: 2 / 3;
+  grid-row: 1 / 2;
+  position: relative;
+  bottom: -6rem;
+  z-index: 2;
+  align-self: end;
+  margin: 0 auto;
+  text-align: center;
+  @include media("top") {
+    bottom: -5rem;
+  }
+  @include media("tablet") {
+    bottom: -4rem;
+  }
+
+  li {
+    color: $color-white;
+    // font-family: 'Zen Kaku Gothic New', sans-serif;
+    // 1440px 時 2.8rem 相当の比率を維持して流動的に
+    font-size: clamp(1.8rem, calc(28 / 1440 * 100vw), 2.8rem);
+    font-weight:700;
+    line-height: 1.6;
+  }
+}
+
+// -----------------------------------------
+// ④ 左ブロック：INDONESIA
+// -----------------------------------------
+.p-about-detail__block-left {
+  grid-column: 1 / 2;
+  grid-row: 1 / 2;
+  position: relative;
+  z-index: 2;
+  will-change: opacity, transform;
+
+  img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  opacity: 0;
+  transform: translateX(-24px);
+  transition:
+    opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+
+  &.is-active {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+// -----------------------------------------
+// ⑤ 右ブロック：JAPAN
+// -----------------------------------------
+.p-about-detail__block-right {
+  grid-column: 3 / 4;
+  grid-row: 1 / 2;
+  position: relative;
+  z-index: 2;
+  will-change: opacity, transform;
+
+  img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  opacity: 0;
+  transform: translateX(24px);
+  transition:
+    opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+
+  &.is-active {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+// -----------------------------------------
+// ⑥ Business 矢印
+// -----------------------------------------
+.p-about-detail__biz-arrow {
+  grid-column: 1 / 4;
+  grid-row: 2 / 3;
+  will-change: clip-path;
+
+  img {
+    display: block;
+    width: 88%;
+    height: auto;
+    margin: 0 auto;
+  }
+
+  clip-path: inset(100% 50% 0% 50%);
+  transition: clip-path 1s cubic-bezier(0.22, 1, 0.36, 1);
+
+  &.is-active {
+    clip-path: inset(0% 0% 0% 0%);
+  }
+}
+
+// -----------------------------------------
+// ラベル共通アニメーション
+// -----------------------------------------
+.p-about-detail__label-pop {
+  opacity: 0;
+  transform: translateY(12px);
+  transition:
+    opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+
+  &.is-active {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// -----------------------------------------
+// アニメーション共通：reduced-motion 対応
+// -----------------------------------------
+@media (prefers-reduced-motion: reduce) {
+  .p-about-detail__center-arrow,
+  .p-about-detail__label-pop,
+  .p-about-detail__block-left,
+  .p-about-detail__block-right,
+  .p-about-detail__biz-arrow {
+    opacity: 1 !important;
+    transform: none !important;
+    clip-path: none !important;
+  }
+
+  .p-about-detail__center-arrow .p-about-detail__center-logo {
+    opacity: 1 !important;
+    transition: none !important;
+  }
+}

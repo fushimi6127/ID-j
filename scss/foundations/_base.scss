@@ -1,0 +1,187 @@
+@use "../foundations/module" as *; // module. や color. なしで直接使える
+
+// ----------------------------------------
+// 基本設定
+// ----------------------------------------
+
+html {
+  font-size: 62.5%; // 1rem = 10px
+  scrollbar-gutter: stable;
+  // 縦スクロールバー領域を常に確保（表示の有無で main / 固定ヘッダーの横幅が変わらないように）
+  overflow-y: scroll;
+}
+
+body {
+  font-family: "Noto Sans JP", "Noto Sans", sans-serif;
+  font-size: 1.6rem;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  letter-spacing: 0.03em;
+  line-height: 2;
+  color: $txt-color;
+  background: $color_white;
+  position: relative;
+  overflow-x: clip;
+
+  @include media("mobile") {
+    font-size: 1.4rem;
+    padding: 0 ;
+  }
+
+  @include media("print") {
+    width: 210mm;
+    height: 251mm;
+    page-break-after: always;
+  }
+}
+
+// In-bound / Out-bound ページ：SP 時メインのみ左右余白
+body.page-inbound main,
+body.page-outbound main {
+  @include media("mobile") {
+    padding: 0 2rem;
+    box-sizing: border-box;
+  }
+}
+
+// ----------------------------------------
+// リンクの基本スタイル
+// ----------------------------------------
+
+
+a {
+  transition: all 0.4s ease-in-out;
+
+  // 画像リンク
+  &:has(img, figure),
+  &:has(div) {
+    &:hover {
+      opacity: 1;
+    }
+  }
+
+  // テキストリンクのみ
+  &:not(:has(*)) {
+    color: $txt-color;
+    text-decoration: none;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+}
+a, a:visited, a:hover, a:active {
+  color: inherit; 
+  text-decoration: inherit; 
+}
+// ----------------------------------------
+// 段落
+// ----------------------------------------
+
+p {
+  margin: 0 0 1em;
+}
+
+// ----------------------------------------
+// 定義リストのマージン・パディング調整
+// ----------------------------------------
+li{
+      list-style-type: none;
+
+}
+dl {
+  dt, dd {
+    padding: 0;
+    margin: 0;
+  }
+}
+
+// ----------------------------------------
+// メイン領域の最低高さ
+// ----------------------------------------
+
+main {
+  min-height: calc(100vh - 260px - 130px); // header + footer想定分を除外
+    flex: 1;
+}
+
+// ----------------------------------------
+// 見出し
+// ----------------------------------------
+
+h1, h2, h3, h4, h5, h6 {
+  line-height: 1.5;
+}
+
+h1, h2, .bold-text {
+  font-weight: 700;
+}
+
+// "Noto Sans" の変数フォント向けクラス（必要に応じてbody以外にも適用可）
+.noto-sans {
+  font-family: "Noto Sans JP", "Noto Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  font-variation-settings:
+    "wdth" 100;
+}
+
+h4, h5, h6 {
+  font-size: 1.4em;
+}
+
+.l-wrapper {
+  // display: flex;
+  // flex-direction: column;
+  min-height: 100vh; // ← 全画面高さを保証
+}
+
+.br-pc {
+   display: block;
+    @include media("mobile") {
+   display: none;
+  }
+}
+.br-sp {
+  display: none;
+
+  @include media("mobile") {
+    display: inline;
+  }
+}
+.br-mobile-large {
+  display:none;
+    @include media("mobile-large") {
+   display: block;
+  }
+}
+.br-mobile-small {
+  display:none;
+    @include media("mobile-small") {
+   display: block;
+  }
+}
+
+.br-mobile-up {
+  display:none;
+    @include media("mobile-up") {
+   display: block;
+  }
+}
+
+
+// color を補間しない（継承テキストの「フォントが変わったように見える」・サブピクセルずれを抑える）
+body {
+  transition: background 0.6s ease;
+}
+
+body.theme-light {
+  background: #ffffff;
+  color: linear-gradient(90deg, #1f1f1f 0%, #2a2a2a 100%);;
+}
+
+body.theme-dark {
+  background: linear-gradient(90deg, #1f1f1f 0%, #2a2a2a 100%);;
+  color: #fff;
+}

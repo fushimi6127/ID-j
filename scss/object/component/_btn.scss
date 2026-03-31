@@ -1,0 +1,248 @@
+@use "../../foundations/module" as *;
+
+// ========================================
+// Line Button
+// 共通ボタン
+// - 文字幅に合わせて下線を表示
+// - 通常時はグレーのベースライン
+// - hoverで指定色のラインが左から右に伸びる
+// - 既存の .button-white / .button-black 互換あり
+// ========================================
+
+// ----------------------------------------
+// Base
+// ----------------------------------------
+.c-button-line,
+.button-white,
+.button-black {
+  position: relative;
+  display: inline-flex;
+  width: auto;
+  margin: 0;
+  padding: 0;
+  font-size: 2.2rem;
+  font-weight: 600;
+  line-height: 1.2;
+  text-align: center;
+  cursor: pointer;
+  z-index: 10;
+
+  @include media("mobile") {
+    font-size: 2rem;
+    justify-content: flex-end;
+  }
+}
+
+// ----------------------------------------
+// Label
+// 線は文字幅基準でここに持たせる
+// ----------------------------------------
+.c-button-line__label,
+.button-white__label,
+.button-black__label {
+  position: relative;
+  display: inline-block;
+  padding: 0.9rem 0 0.5rem;
+}
+
+// ----------------------------------------
+// 通常の線（グレー）
+// ----------------------------------------
+.c-button-line__label::before,
+.button-white__label::before,
+.button-black__label::before {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: #a2a2a2;
+}
+
+// ----------------------------------------
+// hoverで伸びる線（currentColor追従）
+// ----------------------------------------
+.c-button-line__label::after,
+.button-white__label::after,
+.button-black__label::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: currentColor;
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.3s ease;
+}
+
+.c-button-line:hover .c-button-line__label::after,
+.button-white:hover .button-white__label::after,
+.button-black:hover .button-black__label::after,
+.c-button-line:focus-visible .c-button-line__label::after,
+.button-white:focus-visible .button-white__label::after,
+.button-black:focus-visible .button-black__label::after {
+  transform: scaleX(1);
+}
+
+// ----------------------------------------
+// White
+// ----------------------------------------
+.c-button-line--white,
+.button-white {
+  color: #fff;
+}
+
+.c-button-line--white .c-button-line__label::before,
+.button-white .button-white__label::before {
+  background-color: #7c7c7d;
+}
+
+.c-button-line--white .c-button-line__label::after,
+.button-white .button-white__label::after {
+  background-color: #fff;
+}
+
+// ----------------------------------------
+// Black
+// ----------------------------------------
+.c-button-line--black,
+.button-black {
+  color: #000;
+}
+
+.c-button-line--black .c-button-line__label::before,
+.button-black .button-black__label::before {
+  background-color: #a2a2a2;
+}
+
+.c-button-line--black .c-button-line__label::after,
+.button-black .button-black__label::after {
+  background-color: #000;
+}
+
+// ----------------------------------------
+// Solid Border Black + Hover Accent
+// ----------------------------------------
+.c-button-line--border-black,
+.button-black--border-black {
+  color: #000;
+}
+
+.c-button-line--border-black .c-button-line__label::before,
+.button-black--border-black .button-black__label::before {
+  background-color: #000;
+}
+
+.c-button-line--border-black .c-button-line__label::after,
+.button-black--border-black .button-black__label::after {
+  background-color: $color-orange;
+}
+
+// ----------------------------------------
+// Orange
+// ----------------------------------------
+.c-button-line--orange,
+.button-black--border-black01 {
+  color: #000;
+}
+
+.c-button-line--orange .c-button-line__label::before,
+.button-black--border-black01 .button-black__label::before {
+  background-color: #4f4f4f;
+}
+
+.c-button-line--orange .c-button-line__label::after,
+.button-black--border-black01 .button-black__label::after {
+  background-color: #000;
+}
+
+// ----------------------------------------
+// Blue
+// ----------------------------------------
+.c-button-line--blue,
+.button-black--border-black02,
+.button-next--border-black02 {
+  color: #000;
+}
+
+.c-button-line--blue .c-button-line__label::before,
+.button-black--border-black02 .button-black__label::before,
+.button-next--border-black02 .button-black__label::before {
+  background-color: #4f4f4f;
+}
+
+.c-button-line--blue .c-button-line__label::after,
+.button-black--border-black02 .button-black__label::after,
+.button-next--border-black02 .button-black__label::after {
+  background-color: #000;
+}
+
+// ----------------------------------------
+// Green
+// ----------------------------------------
+.c-button-line--green,
+.button-black--border-black03,
+.button-next--border-black03 {
+  color: #000;
+}
+
+.c-button-line--green .c-button-line__label::before,
+.button-black--border-black03 .button-black__label::before,
+.button-next--border-black03 .button-black__label::before {
+  background-color: #4f4f4f;
+}
+
+.c-button-line--green .c-button-line__label::after,
+.button-black--border-black03 .button-black__label::after,
+.button-next--border-black03 .button-black__label::after {
+  background-color: #000;
+}
+
+// ----------------------------------------
+// Yellow
+// ----------------------------------------
+.c-button-line--yellow,
+.button-black--border-black04 {
+  color: #000;
+}
+
+.c-button-line--yellow .c-button-line__label::before,
+.button-black--border-black04 .button-black__label::before {
+  background-color: #4f4f4f;
+}
+
+.c-button-line--yellow .c-button-line__label::after,
+.button-black--border-black04 .button-black__label::after {
+  background-color: #000;
+}
+
+// ----------------------------------------
+// Alignment Utilities
+// ----------------------------------------
+.c-button-line--left {
+  justify-content: flex-start;
+}
+
+.c-button-line--center {
+  justify-content: center;
+}
+
+.c-button-line--right {
+  justify-content: flex-end;
+}
+
+// ----------------------------------------
+// Disabled
+// ----------------------------------------
+.c-button-line[aria-disabled="true"],
+.c-button-line.is-disabled,
+.button-white[aria-disabled="true"],
+.button-white.is-disabled,
+.button-black[aria-disabled="true"],
+.button-black.is-disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}

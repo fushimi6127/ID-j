@@ -1,0 +1,51 @@
+@charset "utf-8";
+
+// =========================================
+// Foundation（基盤）
+// =========================================
+@use "foundations/reset";
+@use "foundations/base";
+// @use "foundations/form"; // 中身なし — フォーム実装時に有効化
+
+// =========================================
+// Layout（レイアウト）
+// =========================================
+@use "layout/header"; // _hamburger.scss を統合済み
+@use "layout/footer";
+// @use "layout/hamburger"; // → _header.scss に統合
+@use "layout/breadcrumbs"; // 現時点では未使用だがREADME記載あり — 実装時に有効化
+// @use "layout/pagination"; // 中身なし
+@use "layout/inner";
+
+// =========================================
+// Object — Component（サイト共通パーツ）
+// =========================================
+// @use "object/component/common"; // 中身なし
+@use "object/component/title";
+@use "object/component/cursor";
+@use "object/component/btn";
+@use "object/component/back-to-top";
+// @use "object/component/card"; // 中身なし
+// @use "object/component/table"; // 中身なし
+
+// =========================================
+// Object — Project（ページ固有）
+// =========================================
+@use "object/project/top";
+@use "object/project/about";
+@use "object/project/service";
+@use "object/project/strength";
+@use "object/project/company";
+@use "object/project/case";
+@use "object/project/case-top";
+@use "object/project/about_detail";
+@use "object/project/scope";
+@use "object/project/outbound";
+@use "object/project/inbound";
+// =========================================
+// Object — Utility（調整）
+// =========================================
+// @use "object/utility/font"; // 現時点では未使用
+// @use "object/utility/space"; // 現時点では未使用
+@use "object/utility/effect";
+// @use "object/utility/utility"; // 現時点では未使用

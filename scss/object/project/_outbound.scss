@@ -1,0 +1,615 @@
+@use "../../foundations/module" as *;
+
+// ===========================================
+// p-marquee-fixed
+// 全セクション貫通のマーキー（-90° 回転・右端固定）
+// #container 直下に配置すること
+// ===========================================
+.p-marquee-fixed {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  width: 100vh;
+  z-index: 1;
+  // overflow: hidden;
+  white-space: nowrap;
+  transform: rotate(-90deg);
+  transform-origin: bottom right;
+  pointer-events: none;
+
+  @include media("mobile") {
+    display: none;
+  }
+
+  &__track {
+    display: inline-flex;
+    animation: marquee-scroll 150s linear infinite;
+  }
+
+  &__text {
+    font-size: clamp(6rem, 14vw, 12rem);
+    font-weight: 900;
+    color: rgba(0, 0, 0, 0.03);
+    padding-right: 0.5em;
+    flex-shrink: 0;
+  }
+}
+
+@keyframes marquee-scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-33.33%);
+  }
+}
+
+// ===========================================
+// p-service-intro
+// ===========================================
+.p-service-intro {
+  position: relative;
+  background-color: $color-white;
+  // overflow: clip は削除 → 子要素の position: sticky が機能しなくなるため
+
+  // -----------------------------------------
+  // 見出しエリア
+  // -----------------------------------------
+  &__bg {
+    position: relative;
+    top: 25%;
+    left: 50%;
+    transform: translate(-50%, 25%);
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    background-color: $color-white;
+
+    @include media("mobile") {
+      position: relative;
+      align-items: flex-start;
+      // min-height: 50svh;
+      padding: 5rem 0 0rem;
+      top: 8%;
+      left: 50%;
+      transform: translate(-50%, 8%);
+    }
+  }
+  &__heading {
+    width: 100%;
+  }
+
+  // -----------------------------------------
+  // ボディテキストエリア
+  // padding-bottom でstickyが外れるタイミングを調整
+  // -----------------------------------------
+  &__cards {
+    position: relative;
+    z-index: 2;
+    padding: 5rem 0 20rem;
+
+    @include media("mobile") {
+      padding: 0rem 0 0rem;
+    }
+  }
+
+  // -----------------------------------------
+  // ボディテキスト：浮き上がりアニメーション
+  // -----------------------------------------
+  &__body {
+    max-width: 72rem;
+    margin: 0 0 0 auto;
+    position: relative;
+    z-index: 30;
+    padding: 5.6rem 2.8rem;
+//     background-color: 
+// color-mix(in srgb, #fff 72%, transparent);
+    // box-shadow: 0 0.4rem 1.2rem rgba(0, 0, 0, 0.06), 0 0.8rem 2.4rem rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    opacity: 0;
+    filter: blur(8px);
+    transform: translate3d(0, 8rem, 0);
+    transition:
+      opacity 0.9s ease,
+      transform 1s cubic-bezier(0.22, 1, 0.36, 1),
+      filter 0.9s ease;
+
+    &.is-visible {
+      opacity: 1;
+      filter: blur(0);
+      transform: translate3d(0, 0, 0);
+    }
+
+    // SP: IntersectionObserver を付けない前提で、常に表示（親の opacity:0 を上書き）— p-import-intro と同じ
+    @include media("mobile") {
+      opacity: 1;
+      filter: none;
+      transform: none;
+      transition: none;
+      box-shadow: none;
+      padding: 0;
+      margin: 10rem 0 0 auto;
+    }
+
+    p {
+      font-size: 1.6rem;
+      line-height: 2;
+      color: $txt-light-color;
+
+      & + p {
+        margin-top: 2.4rem;
+      }
+
+      @include media("mobile") {
+        font-size: 1.4rem;
+        line-height: 1.85;
+      }
+    }
+  }
+}
+
+// =========================================
+// p-why-indonesia
+// =========================================
+.p-why-indonesia {
+  position: relative;
+  overflow: visible;
+  padding: 0 0 15rem;
+  color: $color-black;
+  background: $color-white;
+  transform-origin: center center;
+
+  .l-inner {
+    position: relative;
+    overflow: visible;
+  }
+
+  // -----------------------------------------
+  // Heading（sticky 解除）
+  // -----------------------------------------
+  &__heading {
+    z-index: 3;
+    margin-bottom: 6rem;
+  }
+
+  // -----------------------------------------
+  // Main content area
+  // -----------------------------------------
+  &__content {
+    position: relative;
+    z-index: 10;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(42rem, 58rem);
+    column-gap: 4rem;
+    align-items: center;
+    padding: 5.6rem 2.8rem;
+    color: inherit;
+    text-decoration: none;
+    overflow: hidden;
+    transition:
+      transform 0.15s cubic-bezier(0.4, 0, 0.2, 1),
+      box-shadow 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+
+    @include media("tablet") {
+      grid-template-columns: 1fr;
+      row-gap: 4rem;
+    }
+
+    @include media("mobile") {
+      padding: 4rem 0rem;
+      // row-gap: 3rem;
+    }
+  }
+
+  // -----------------------------------------
+  // Stats area
+  // -----------------------------------------
+  &__stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    align-items: stretch;
+  }
+
+  &__stat-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 16rem;
+    padding: 3rem 2rem;
+    text-align: center;
+    border-right: 1px solid rgba(17, 17, 17, 0.35);
+
+    &:last-child {
+      border-right: none;
+    }
+  }
+
+  &__stat-number {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    gap: 0.4rem;
+    margin: 0;
+    color: $color-black;
+    font-size: clamp(4.8rem, 4.5vw, 6rem);
+    font-weight: 900;
+    line-height: 1;
+    letter-spacing: -0.04em;
+  }
+
+  &__stat-unit {
+    display: inline-block;
+    margin-bottom: 0.45rem;
+    font-size: 0.5em;
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: 0;
+  }
+
+  &__stat-label {
+    margin-top: 1.4rem;
+    margin-bottom: 0;
+    color: $color-black;
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 1.6;
+    letter-spacing: 0.02em;
+  }
+
+  &__stat-desc {
+    display: none;
+  }
+
+  // -----------------------------------------
+  // Body text
+  // -----------------------------------------
+  &__body {
+    max-width: 58rem;
+    margin-left: auto;
+
+    p {
+      margin: 0;
+      color: $color-black;
+      font-size: 2rem;
+      font-weight: 700;
+      line-height: 2;
+      letter-spacing: 0.01em;
+      text-align: left;
+
+      & + p {
+        margin-top: 1rem;
+      }
+    }
+  }
+
+  // -----------------------------------------
+  // Right side vertical text
+  // -----------------------------------------
+  &__footer-heading {
+    position: absolute;
+    top: 0;
+    right: 2.4rem;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    pointer-events: none;
+  }
+
+  &__footer-text {
+    display: block;
+    color: rgba(0, 0, 0, 0.04);
+    font-size: clamp(9rem, 10vw, 16rem);
+    font-weight: 900;
+    line-height: 1;
+    letter-spacing: -0.04em;
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    white-space: nowrap;
+    user-select: none;
+  }
+
+  // -----------------------------------------
+  // Tablet
+  // -----------------------------------------
+  @include media("tablet") {
+    padding: 12rem 0 10rem;
+
+    &__heading {
+      margin-bottom: 4rem;
+    }
+
+    &__content {
+      grid-template-columns: 1fr;
+      row-gap: 4rem;
+      align-items: start;
+    }
+
+    &__body {
+      max-width: 100%;
+      margin-left: 0;
+    }
+
+    &__footer-heading {
+      right: 1rem;
+    }
+
+    &__footer-text {
+      font-size: clamp(7rem, 9vw, 12rem);
+    }
+  }
+
+  // -----------------------------------------
+  // Mobile
+  // -----------------------------------------
+  @include media("mobile") {
+    padding: 5rem 0rem;
+
+    &__heading {
+      margin-bottom: 2.4rem;
+    }
+
+    &__content {
+      grid-template-columns: 1fr;
+      row-gap: 3rem;
+    }
+
+    // &__stats {
+    //   grid-template-columns: 1fr;
+    //   border-bottom: none;
+    // }
+
+    &__stat-card {
+      min-height: auto;
+      padding: 2.4rem 1.2rem;
+      // border-right: none;
+      // border-bottom: 1px solid rgba(17, 17, 17, 0.08);
+
+      // &:last-child {
+      //   border-bottom: 1px solid rgba(17, 17, 17, 0.08);
+      // }
+    }
+
+    &__stat-number {
+      font-size: 4.5rem;
+    }
+
+    &__stat-label {
+      margin-top: 1rem;
+      font-size: 1.2rem;
+      line-height: 1.5;
+    }
+
+    &__body {
+      p {
+        font-size: 1.4rem;
+        line-height: 1.9;
+        font-weight: 400;
+      }
+    }
+
+    &__footer-heading {
+      right: 0.4rem;
+    }
+
+    &__footer-text {
+      font-size: 5.5rem;
+    }
+  }
+}
+
+// =========================================
+// p-roadmap
+// =========================================
+$roadmap-border: #ddd;
+$roadmap-text-dim: #666;
+
+.p-roadmap {
+  position: relative;
+  padding: 10rem 0;
+  background-color: $color-white;
+  color: $txt-color;
+  overflow: hidden;
+
+  @include media("mobile") {
+    padding: 6rem 0;
+  }
+
+  .l-inner {
+    position: relative;
+  }
+
+  // -----------------------------------------
+  // ヘッダー
+  // -----------------------------------------
+  &__header {
+    margin-bottom: 6rem;
+    padding-bottom: 2.4rem;
+    border-bottom: 1px solid #ccc;
+
+    @include media("mobile") {
+      margin-bottom: 2rem;
+      padding-bottom: 2rem;
+    }
+  }
+
+  // -----------------------------------------
+  // 背景の大きな数字
+  // -----------------------------------------
+  &__bg-number {
+    position: absolute;
+    font-size: clamp(20rem, 35vw, 50rem);
+    font-weight: 900;
+    line-height: 1;
+    color: rgba(0, 0, 0, 0.04);
+    bottom: -8rem;
+    right: -3rem;
+    z-index: 0;
+    user-select: none;
+    pointer-events: none;
+
+    @include media("mobile") {
+      font-size: clamp(12rem, 40vw, 20rem);
+      bottom: -4rem;
+      right: -1rem;
+    }
+  }
+
+  // -----------------------------------------
+  // 3カラムグリッド
+  // -----------------------------------------
+  &__grid {
+    position: relative;
+    z-index: 999;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background-color: $roadmap-border;
+    border: 1px solid $roadmap-border;
+
+    @include media("mobile") {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  // -----------------------------------------
+  // 各セル
+  // -----------------------------------------
+  &__cell {
+    background-color: $color-white;
+    padding: 4rem;
+    display: flex;
+    flex-direction: column;
+
+    @include media("mobile") {
+      padding: 3.2rem 2.4rem;
+    }
+
+    &--highlight {
+      background-color: $color-white;
+    }
+  }
+
+  &__cell-top {
+    margin-bottom: 3rem;
+
+    @include media("mobile") {
+      margin-bottom: 2rem;
+    }
+  }
+
+  // -----------------------------------------
+  // インデックス番号
+  // -----------------------------------------
+  &__index {
+    display: block;
+    font-size: 2rem;
+    font-weight: 900;
+    color: $txt-color;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+
+  // -----------------------------------------
+  // セルタイトル
+  // -----------------------------------------
+  &__cell-title {
+    margin: 0;
+    font-size: 2.6rem;
+    font-weight: 900;
+    line-height: 1.3;
+    letter-spacing: -0.02em;
+    color: $txt-color;
+  }
+
+  // -----------------------------------------
+  // リスト
+  // -----------------------------------------
+  &__list {
+    list-style: none;
+    flex: 1;
+
+    li {
+      font-size: 1.6rem;
+      color: $roadmap-text-dim;
+      margin-bottom: 1.2rem;
+      line-height: 1.6;
+      display: flex;
+      align-items: flex-start;
+
+      &::before {
+        content: "■";
+        margin-right: 1rem;
+        color: $txt-color;
+        font-weight: 900;
+        flex-shrink: 0;
+      }
+
+      @include media("mobile") {
+        font-size: 1.6rem;
+      }
+    }
+  }
+
+  // -----------------------------------------
+  // 価格エリア
+  // -----------------------------------------
+  &__price {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px dashed $roadmap-border;
+
+    @include media("mobile") {
+      margin-top: 2rem;
+      padding-top: 1.6rem;
+    }
+  }
+
+  &__price-label {
+    display: block;
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: $roadmap-text-dim;
+    margin-bottom: 0.5rem;
+  }
+
+  &__price-val {
+    margin: 0;
+    font-size: 2.8rem;
+    font-weight: 900;
+    letter-spacing: -0.02em;
+    color: $txt-color;
+    text-align: right;
+
+    span {
+      font-size: 1.8rem;
+      color: $roadmap-text-dim;
+      margin-left: 0.4rem;
+    }
+  }
+
+  // -----------------------------------------
+  // 下部ライン
+  // -----------------------------------------
+  &__bottom-bar {
+    position: relative;
+    z-index: 1;
+    height: 0.4rem;
+    width: 100%;
+    margin-top: 0;
+    background-color: $txt-color;
+  }
+}
+
+.p-roadmap__cell-text {
+  margin-top: 1.2rem;
+  font-size: clamp(1.2rem, calc(14 / 1440 * 100vw), 1.4rem);
+  line-height: 1.8;
+  color: $txt-light-color;
+}
+ul.p-roadmap__price-notes {
+  font-size: 1.4rem;
+}

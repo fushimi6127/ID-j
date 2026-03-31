@@ -1,0 +1,254 @@
+@use "../../foundations/module" as *;
+
+// ========================================
+// Common Heading Motion
+// 見出しアニメーション共通パーツ
+// matrix + text fade up のみ
+//
+// 使用例：
+// <div class="c-heading-block c-heading-block--white matrix js-matrix">
+//   <span class="matrix__wrap">
+//     <h3 class="c-heading">
+//       <span class="bgappearTrigger">Title</span>
+//     </h3>
+//   </span>
+//
+//   <h4 class="c-section-sublead">
+//     <span class="bgappearTrigger">Sub lead</span>
+//   </h4>
+//
+//   <p class="c-heading-block__lead">lead text...</p>
+// </div>
+// ========================================
+
+// ========================================
+// Heading Block
+// ========================================
+.c-heading-block {
+  width: 100%;
+  max-width: 120rem;
+  margin: 0 auto;
+
+  &__lead {
+    max-width: 64rem;
+    margin-top: 4rem;
+    font-size: 1.6rem;
+    line-height: 2;
+    color: $txt-color;
+
+    @include media("mobile") {
+      max-width: 100%;
+      margin-top: 3rem;
+      font-size: 1.4rem;
+      line-height: 1.85;
+    }
+  }
+
+  &--white {
+    .c-heading,
+    .c-section-sublead,
+    .c-heading-block__lead {
+      color: $color-white;
+    }
+  }
+
+  &--black {
+    .c-heading,
+    .c-section-sublead,
+    .c-heading-block__lead {
+      color: $txt-color;
+    }
+  }
+
+  &--center {
+    text-align: center;
+
+    .c-heading,
+    .c-section-sublead,
+    .c-heading-block__lead {
+      margin-right: auto;
+      margin-left: auto;
+      text-align: center;
+    }
+  }
+
+  &--left {
+    text-align: left;
+
+    .c-heading,
+    .c-section-sublead,
+    .c-heading-block__lead {
+      text-align: left;
+    }
+  }
+}
+
+// ========================================
+// Heading
+// ========================================
+.c-heading {
+  // 1440px 時: 9.6rem / margin-top 5rem / margin-bottom 3rem を基準に比率維持
+  margin-top: clamp(2.4rem, calc(50 / 1440 * 100vw), 5rem);
+  margin-bottom: clamp(1.4rem, calc(30 / 1440 * 100vw), 3rem);
+  font-size: clamp(5rem, calc(96 / 1440 * 100vw), 8.5rem);
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: 0.01em;
+  color: $color-white;
+
+  @include media("mobile") {
+    text-align: left;
+  }
+
+  &--black {
+    color: $txt-color;
+  }
+
+  &--center {
+    text-align: center;
+  }
+
+  &--about {
+    letter-spacing: 0.01em;
+  }
+}
+
+// ========================================
+// Section Catch
+// ========================================
+.c-section-catch {
+  position: relative;
+  display: inline-block;
+  padding-bottom: 1rem;
+  font-size: 7.2rem;
+  font-weight: 900;
+  line-height: 1.2;
+  color: $color-white;
+
+  @include media("mobile") {
+    margin-bottom: 1rem;
+    font-size: 4.2rem;
+    text-align: left;
+  }
+
+  &--black {
+    color: $txt-color;
+  }
+
+  &--about {
+    display: block;
+    text-align: center;
+    letter-spacing: 1px;
+
+    @include media("mobile") {
+      text-align: center;
+    }
+  }
+}
+
+// ========================================
+// Section Sublead
+// ========================================
+.c-section-sublead {
+  margin-bottom: 5rem;
+  font-size: 3.2rem;
+  font-weight: 900;
+  line-height: 1.6;
+  color: $color-white;
+
+  @include media("mobile") {
+    font-size: 1.8rem;
+    margin-bottom: 0rem;
+  }
+
+  &--black {
+    color: $txt-color;
+  }
+
+  &--about {
+    letter-spacing: -0.03em;
+
+    @include media("mobile") {
+      text-align: left;
+      letter-spacing: 0;
+    }
+  }
+
+  &--center {
+    text-align: center;
+  }
+}
+
+// ========================================
+// Matrix Motion
+// js側で .is-animated を付与
+// ========================================
+.matrix {
+  &__wrap {
+    display: block;
+    overflow: hidden;
+    opacity: 0;
+    transition: opacity 0.6s ease;
+
+    @include media("mobile") {
+      margin-bottom: 0rem;
+    }
+
+    & + & {
+      margin-top: 1.5rem;
+    }
+  }
+
+  &__wrap > * {
+    opacity: 0;
+    transform: translate3d(0, 10rem, 0);
+    transition:
+      transform 1.2s cubic-bezier(0.22, 1, 0.36, 1),
+      opacity 1.2s ease;
+    will-change: transform, opacity;
+  }
+
+  &.is-animated {
+    .matrix__wrap {
+      opacity: 1;
+    }
+
+    .matrix__wrap > * {
+      opacity: 1;
+      transform: translate3d(0, 0, 0);
+    }
+  }
+}
+
+// ========================================
+// Text fade up（帯なし）
+// ========================================
+.bgappearTrigger {
+  display: inline-block;
+  opacity: 0;
+  transform: translate3d(0, 2rem, 0);
+  transition:
+    transform 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.8s ease;
+  transition-delay: 0.1s;
+  will-change: transform, opacity;
+}
+
+.is-animated .bgappearTrigger,
+.bgappearTrigger.is-animated {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+// ========================================
+// Heading Group Utility
+// ========================================
+.c-heading-group {
+  &--narrow {
+    max-width: 96rem;
+  }
+
+  &--wide {
+    max-width: 120rem;
+  }
+}

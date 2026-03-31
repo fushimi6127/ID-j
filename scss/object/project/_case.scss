@@ -1,0 +1,335 @@
+@use "../../foundations/module" as *;
+
+// =========================================
+// p-case-page（Caseページ 下層ページ専用）
+// =========================================
+.p-case-page {
+  position: relative;
+  width: 100%;
+  max-width: 120rem;
+  margin: 0 auto;
+  min-height: 90vh;
+  min-height: 90svh;
+  // PC〜タブレット横：38:62 の比率を維持しつつ minmax(0) で縮小時のはみ出しを防止
+  display: grid;
+  grid-template-columns: minmax(0, 38fr) minmax(0, 62fr);
+  align-items: stretch;
+  box-sizing: border-box;
+  padding-inline: clamp(1rem, 2.4vw, 4rem);
+  overflow-x: clip;
+  overflow-y: visible;
+  background-color: $color-white;
+
+  @include media("mobile") {
+    display: flex;
+    flex-direction: column;
+    padding-inline: 0;
+  }
+  &__heading {
+    position: relative;
+    z-index: 1;
+    margin: 0 auto;
+
+    @include media("mobile") {
+      flex-direction: column;
+      // width: calc(100% - 3.2rem);
+      padding-top: 0rem;
+    }
+  }
+
+  &__left {
+    min-width: 0;
+    min-height: 100vh;
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+    padding:
+      clamp(5rem, 10vh, 14rem)
+      clamp(0.8rem, calc(0vw), 3rem)
+      clamp(3rem, 5vh, 8rem)
+      0;
+    box-sizing: border-box;
+
+    @include media("mobile") {
+      width: 100%;
+      min-height: auto;
+      padding: 3rem 1.6rem 4rem;
+    }
+  }
+
+  &__list {
+    position: relative;
+    z-index: 1;
+    min-width: 0;
+
+    @include media("mobile") {
+      padding-right: 0;
+    }
+  }
+
+  &__pagination {
+    position: fixed;
+    right: 2rem;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+
+    @include media("content") {
+      position: absolute;
+      right: 50%;
+      top: auto;
+      bottom: 0rem;
+      transform: translateX(50%);
+      flex-direction: row;
+      gap: 1.2rem;
+
+    }
+  }
+
+  &__pagination-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 3.6rem;
+    height: 3.6rem;
+    padding: 0;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    background: #fff;
+    font-size: 1.1rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    color: rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+    transition:
+      color 0.25s ease,
+      border-color 0.25s ease,
+      background-color 0.25s ease;
+
+    &:hover {
+      color: $color-black;
+      border-color: $color-black;
+    }
+
+    &.is-active {
+      color: $color-white;
+      background-color: $color-black;
+      border-color: $color-black;
+    }
+
+    @include media("mobile") {
+      font-size: 1rem;
+    }
+  }
+
+  &__back {
+    position: fixed;
+    left: 4rem;
+    bottom: 4rem;
+    z-index: 100;
+
+    @include media("mobile") {
+      left: 1.6rem;
+      bottom: 3.2rem;
+    }
+  }
+
+  &__body-list {
+    position: relative;
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    min-width: 0;
+  }
+
+  &__body {
+    display: none;
+
+    &.is-active {
+      display: block;
+    }
+  }
+}
+
+// =========================================
+// p-case-page-item
+// =========================================
+.p-case-page-item {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  @include media("mobile") {
+    min-height: 80vh;
+  min-height: 80svh;
+  }
+  &:first-child {
+    position: relative;
+    min-height: 100vh;
+    min-height: 100svh;
+    @include media("mobile") {
+      min-height: 80vh;
+    min-height: 80svh;
+    }
+  }
+
+  &.is-active {
+    z-index: 1;
+    opacity: 1;
+    pointer-events: auto;
+    @include media("mobile") {
+display: block;
+    }
+  }
+
+  &__category {
+    margin: 0 0 1rem;
+    font-size: clamp(2rem, calc(40 / 1440 * 100vw), 4rem);
+    font-weight: 900;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+    color: $color-black;
+    overflow-wrap: break-word;
+  }
+
+  &__title {
+    margin: 0 0 2rem;
+    font-size: clamp(1.3rem, calc(18 / 1440 * 100vw), 1.8rem);
+    font-weight: 700;
+    line-height: 1.7;
+    letter-spacing: 0.02em;
+    color: $color-black;
+    overflow-wrap: break-word;
+
+    @include media("mobile") {
+      font-size: 1.5rem;
+    }
+  }
+
+  &__rule {
+    border: none;
+    border-top: 1px solid $color-black;
+    margin: 0 0 2rem;
+    width: 100%;
+  }
+
+  &__lead {
+    margin: 0;
+    font-size: clamp(1.2rem, calc(14 / 1440 * 100vw), 1.4rem);
+    line-height: 1.85;
+    letter-spacing: 0.02em;
+    color: $color-gray-dark;
+    overflow-wrap: break-word;
+
+    @include media("mobile") {
+      font-size: 1.3rem;
+    }
+  }
+
+  &__media {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 1.6rem;
+    box-sizing: border-box;
+    width: 100%;
+    max-width: min(72rem, 100%);
+    margin: auto;
+    padding:
+      clamp(5rem, 10vh, 14rem)
+      clamp(0.4rem, 1.5vw, 2rem)
+      clamp(3rem, 5vh, 8rem);
+    z-index: 5;
+
+    @include media("mobile") {
+      max-width: 100%;
+      padding: 1.2rem 0 6rem;
+    }
+  }
+
+  &__slides {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 4 / 3;
+    width: 100%;
+  }
+
+  &__slide {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    margin: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+
+    &.is-active {
+      z-index: 1;
+      opacity: 1;
+    }
+
+    img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  &__slide-nav {
+    display: flex;
+    gap: 0.8rem;
+    justify-content: center;
+  }
+
+  &__slide-nav-btn {
+    display: block;
+    width: 2.4rem;
+    height: 2px;
+    padding: 0;
+      background: rgba(0, 0, 0, 0.1);  // 非アクティブ: より薄く（存在感を落とす）
+  border: 1px solid rgba(0, 0, 0, 0.3); // 輪郭で視認性を補完
+    cursor: pointer;
+    transition: background-color 0.25s ease;
+
+    &:hover {
+      background: rgba(0, 0, 0, 0.5);
+    }
+
+    &.is-active {
+      background: $color-black;
+    }
+  }
+
+  &__number {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    z-index: 0;
+    margin: 0;
+    max-width: 100%;
+    font-size: clamp(5rem, calc(240 / 1440 * 100vw), 15rem);
+    font-weight: 900;
+    line-height: 0.85;
+    letter-spacing: -0.04em;
+    color: $color-gray-pale;
+    pointer-events: none;
+    user-select: none;
+
+    @include media("mobile") {
+      font-size: clamp(7rem, 24vw, 14rem);
+      bottom: 15rem;
+    }
+  }
+}

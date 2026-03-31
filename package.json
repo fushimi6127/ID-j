@@ -1,0 +1,11 @@
+{
+  "scripts": {
+    "build:css": "sass scss/style.scss css/style.css --source-map",
+    "watch:css": "sass scss/style.scss css/style.css --source-map --watch --poll",
+    "dev": "npm run watch:css",
+    "verify:css": "npm run build:css && grep -q '.p-mainvisual' css/style.css && grep -q '.c-back-to-top' css/style.css && echo 'css/style.css OK (_top / back-to-top 含む)'"
+  },
+  "devDependencies": {
+    "sass": "^1.98.0"
+  }
+}

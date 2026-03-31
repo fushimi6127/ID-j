@@ -1,0 +1,483 @@
+@use "../foundations/module" as *;
+
+// =========================================
+// l-header（_hamburger.scss を統合済み）
+// =========================================
+
+.l-header {
+  position: relative;
+  width: 100%;
+  z-index: 1000;
+  font-family: "Noto Sans JP", "Noto Sans", sans-serif;
+  font-synthesis: none;
+
+  // ----- ダーク背景時 -----
+  &.is-dark {
+    .l-header__inner {
+      background-color: #000;
+
+      @include media("mobile") {
+        // background-color: transparent;
+      }
+    }
+
+    .l-header__nav-link {
+      color: #fff;
+
+      &:visited {
+        color: #fff;
+      }
+
+      &::after {
+        background-color: #fff;
+      }
+    }
+
+    .l-header__hamburger span {
+      background-color: #fff;
+    }
+
+    @include media("mobile") {
+      .l-header__hamburger {
+        background-color: #000;
+
+        &.is-active {
+          background: transparent;
+        }
+      }
+    }
+  }
+
+  // ----- 白背景時 -----
+  &.is-white {
+    .l-header__inner {
+      background-color: $color-white;
+
+      @include media("mobile") {
+        // background-color: transparent;
+      }
+    }
+
+    .l-header__nav-link {
+      color: $color-black;
+
+      &:visited {
+        color: $color-black;
+      }
+
+      &::after {
+        background-color: $color-black;
+      }
+    }
+
+    .l-header__hamburger span {
+      background-color: $color-black;
+    }
+
+    @include media("mobile") {
+      .l-header__hamburger {
+        background-color: $color-white;
+
+        &.is-active {
+          background: transparent;
+        }
+      }
+    }
+  }
+
+  // ----- インナー（固定バー・背景は is-dark / is-white で切替） -----
+  &__inner {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    // width: 100%;
+    max-width: 100%;
+    padding: 0 1.6rem;
+    margin: 0 auto;
+    overflow: visible;
+    z-index: 1000;
+    box-sizing: border-box;
+    background-color: $color-white;
+  }
+
+  &.is-ready &__inner {
+    transition: background-color 0.3s ease;
+  }
+
+  // ----- ロゴ -----
+  &__logo {
+    margin: 0;
+    width: auto;
+    height: 5.5rem;
+
+    &-link {
+      display: inline-block;
+      line-height: 1;
+    }
+
+    img {
+      display: block;
+      width: 14rem;
+      height: auto;
+      padding: 0.5rem;
+    }
+  }
+
+  // ----- PCナビ -----
+  &__nav {
+    @include media("mobile") {
+      display: none;
+    }
+  }
+
+  &__nav-list {
+    display: flex;
+    gap: 4rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    @include media("tablet") {
+      gap: 2.4rem;
+    }
+  }
+
+  &__nav-item {
+    font-weight: 700;
+  }
+
+  &__nav-link {
+    position: relative;
+    font-size: 1.6rem;
+    font-weight: 700;
+    padding-bottom: 0.5rem;
+    letter-spacing: 0.03em;
+    // _base.scss の a { transition: all } を打ち消す（クリック:active 等で文字が微妙に動くのを防ぐ）
+    transition: none;
+
+    &:visited {
+      color: $color-black;
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      height: 0.2rem;
+      border-radius: 1.5rem;
+      transform: scaleX(0);
+      transform-origin: left center;
+      transition: transform 0.3s ease;
+    }
+
+    &:hover::after {
+      transform: scaleX(1);
+    }
+  }
+
+  &.is-ready &__nav-link {
+    transition: color 0.3s ease;
+  }
+
+  // ----- Our Service ドロップダウン（PC） -----
+  &__nav-item--has-sub {
+    position: relative;
+
+    &:hover .l-header__nav-sub,
+    &:focus-within .l-header__nav-sub {
+      opacity: 1;
+      visibility: visible;
+      transform: translate(-50%, 0);
+    }
+  }
+
+  &__nav-caret {
+    display: inline-block;
+    width: 0.45em;
+    height: 0.45em;
+    margin-left: 0.5rem;
+    border-right: 2px solid currentColor;
+    border-bottom: 2px solid currentColor;
+    transform: rotate(45deg) translateY(-0.15em);
+    vertical-align: middle;
+    opacity: 0.75;
+    visibility: hidden;
+
+    .fonts-loaded & {
+      visibility: visible;
+    }
+  }
+
+  &__nav-sub {
+    position: absolute;
+    top: calc(100% + 0.6rem);
+    left: 50%;
+    z-index: 1002;
+    min-width: 22rem;
+    margin: 0;
+    padding: 0.6rem 0;
+    list-style: none;
+    background-color: $color-white;
+    border-radius: 0.4rem;
+    box-shadow: 0 0.4rem 1.6rem rgba(0, 0, 0, 0.14);
+    opacity: 0;
+    visibility: hidden;
+    transform: translate(-50%, -0.4rem);
+    transition:
+      opacity 0.25s ease,
+      visibility 0.25s ease,
+      transform 0.25s ease;
+  }
+
+  &__nav-sublink {
+    display: block;
+    padding: 0.85rem 1.6rem;
+    font-size: 1.4rem;
+    font-weight: 600;
+    line-height: 1.4;
+    color: $color-black;
+    text-decoration: none;
+    transition: background-color 0.2s ease;
+
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.06);
+    }
+
+    &:focus-visible {
+      outline: 2px solid $color-black;
+      outline-offset: -2px;
+    }
+  }
+
+  // ----- SP: ダークパネル（英日2行・CLOSE・ロゴ・透かし） -----
+  &__nav-sp-watermark {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+  }
+
+  &__nav-sp-watermark-img {
+    width: min(92%, 36rem);
+    height: auto;
+    opacity: 0.07;
+    filter: grayscale(1);
+  }
+
+  &__nav-sp-head {
+    position: relative;
+    z-index: 2;
+    display: block;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.6rem;
+    padding: 2rem 1.6rem 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  }
+
+  &__nav-sp-close {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    color: #fff;
+    font-family: inherit;
+  }
+
+  &__nav-sp-close-line {
+    display: block;
+    width: 1.6rem;
+    height: 2px;
+    background-color: #fff;
+  }
+
+  &__nav-sp-close-text {
+    font-size: 1.1rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    color: #fff;
+  }
+
+  &__nav-sp-logo {
+    display: block;
+    flex: 0 0 auto;
+    max-width: 14rem;
+    line-height: 0;
+
+    img {
+      display: block;
+      width: 100%;
+      height: auto;
+      filter: brightness(0) invert(1);
+    }
+  }
+
+  &__nav-sp-item--has-sub {
+    text-align: left;
+    width: 100%;
+
+    > .l-header__nav-sp-link {
+      margin-bottom: 0.4rem;
+    }
+  }
+
+  &__nav-sp-sub {
+    list-style: none;
+    margin: 0 0 0 1rem;
+    padding: 0 0 0 1rem;
+    border-left: 1px solid rgba(255, 255, 255, 0.2);
+    display: flex;
+    flex-direction: column;
+    gap: 1.6rem;
+  }
+
+  &__nav-sp-link {
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+    align-items: flex-start;
+    text-decoration: none;
+    color: #fff;
+
+    &:visited {
+      color: #fff;
+    }
+  }
+
+  &__nav-sp-link-en {
+    font-size: clamp(2rem, 4.3vw, 2.8rem);
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    line-height: 1.15;
+    text-transform: uppercase;
+  }
+
+  &__nav-sp-link-ja {
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.45;
+    opacity: 0.78;
+  }
+
+  &__nav-sp-link--sub {
+    .l-header__nav-sp-link-en {
+      font-size: 1.65rem;
+      letter-spacing: 0.03em;
+      text-transform: none;
+    }
+
+    .l-header__nav-sp-link-ja {
+      font-size: 1rem;
+    }
+  }
+
+  // ----- ハンバーガーボタン -----
+  &__hamburger {
+    display: none;
+    width: 3rem;
+    height: 2.4rem;
+    flex-direction: column;
+    justify-content: space-between;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    z-index: 1001;
+
+    span {
+      display: block;
+      width: 100%;
+      height: 2px;
+      background-color: $color-black;
+      transition:
+        background-color 0.3s ease,
+        transform 0.3s ease,
+        opacity 0.3s ease;
+    }
+
+    &.is-active span {
+      background-color: $color-black;
+
+      &:nth-child(1) {
+        transform: translateY(11px) rotate(45deg);
+      }
+
+      &:nth-child(2) {
+        opacity: 0;
+      }
+
+      &:nth-child(3) {
+        transform: translateY(-11px) rotate(-45deg);
+      }
+    }
+
+    @include media("mobile") {
+      display: flex;
+      background-color: $color-white;
+      transition: background-color 0.3s ease;
+
+      &.is-active {
+        background: transparent;
+      }
+    }
+  }
+
+  // ----- SPナビゲーション（全画面・ダーク） -----
+  &__nav-sp {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 100%;
+    max-width: 100%;
+    height: 100vh;
+    height: 100dvh;
+    background: #0a0a0a;
+    color: #fff;
+    overflow-x: hidden;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    transition: right 0.35s ease;
+    z-index: 1000;
+    display: none;
+
+    &.is-active {
+      display: block;
+      right: 0;
+    }
+
+    ul.l-header__nav-sp-list {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin: 0;
+      padding: 1rem 1.6rem 2.4rem;
+      list-style: none;
+      text-align: left;
+
+    }
+
+    @include media("pc") {
+      display: none !important;
+    }
+  }
+}
+
+// メニュー開閉時：ハンバーガーを白（ダークパネル上）
+body.is-nav-sp-open .l-header .l-header__hamburger span {
+  background-color: #fff;
+}

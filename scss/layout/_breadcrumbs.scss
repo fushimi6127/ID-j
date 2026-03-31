@@ -1,0 +1,20 @@
+@use "../foundations/module" as *;
+
+.breadcrumb {
+  font-family: "Zen Kaku Gothic New", YuGothic, "Yu Gothic Medium", "Hiragino Kaku Gothic Pro", Meiryo, "MS PGothic", sans-serif;
+  font-size: 1.4rem;
+  font-weight: 500;
+  display: flex;
+  gap: 16px;
+
+  a {
+    &, &:visited, &:active, &:focus {
+      color: #23181580;
+    }
+    &::after {
+      content: "/";
+      display: inline-block;
+      margin-left: 16px;
+    }
+  }
+}

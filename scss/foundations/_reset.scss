@@ -1,0 +1,109 @@
+/* リセット */
+// ブラウザのプロパティをデフォルト値にリセット、displayプロパティを元に戻す
+*:where(:not(html, iframe, canvas, img, svg, video, audio):not(svg*, symbol*)) {
+  all: unset;
+  display: revert;
+}
+// すべての要素（疑似要素も含む）に box-sizing: border-box; を適用
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+// イタリック解除
+* {
+  font-style: normal;
+}
+// モバイルデバイスでのテキストサイズの自動調整を無効
+// html {
+//   text-size-adjust: none;
+// }
+// 余分なスペースを削除・横のはみ出しを非表示
+body {
+  margin: 0;
+  width: 100%;
+  overflow-x: hidden;
+}
+// カーソルの形をブラウザのデフォルトに戻す
+a,
+button {
+  cursor: revert;
+}
+// 比率を保ちつつレスポンシブ対応
+// 親要素からはみ出さないようにする
+img {
+  width: auto;
+  max-width: 100%;
+  height: auto;
+  max-inline-size: 100%;
+  max-block-size: 100%;
+  vertical-align: middle;
+}
+// テーブルのセル間の余分な隙間をなくす
+table {
+  border-collapse: collapse;
+}
+// 入力欄でテキストを選択できるようにする
+input,
+textarea {
+  -webkit-user-select: auto;
+  user-select: auto;
+}
+// テキストエリアで改行を正しく表示
+textarea {
+  white-space: revert;
+}
+// メーター要素のデザインをブラウザのデフォルトに戻す
+meter {
+  appearance: revert;
+}
+// preタグのスタイルをリセットして、box-sizingを設定
+:where(pre) {
+  all: revert;
+  box-sizing: border-box;
+}
+// プレースホルダーの色をリセット
+::placeholder {
+  color: unset;
+}
+// hidden属性がついた要素を非表示
+:where([hidden]) {
+  display: none;
+}
+// 編集可能な要素の動作を調整
+:where([contenteditable]:not([contenteditable="false"])) {
+  -webkit-user-modify: read-write;
+  overflow-wrap: break-word;
+  line-break: after-white-space;
+  user-select: auto;
+}
+// ドラッグ可能な要素の挙動を設定
+:where([draggable="true"]) {
+  -webkit-user-drag: element;
+}
+// モーダルダイアログのスタイルをリセットして、box-sizingを設定
+:where(dialog:modal) {
+  all: revert;
+  box-sizing: border-box;
+}
+// 余計なスペース削除
+:where(figure,
+h1, h2, h3, h4, h5, h6) {
+  margin: 0;
+}
+// リストの余分なスペースを削除
+:where(ul, ol, dl) {
+  padding: 0;
+  margin: 0;
+}
+// オブジェクトの形に合わせる
+// figure {
+//   display: inline-block;
+// }
+// リンクから下線を削除
+a {
+  all: revert;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}

@@ -1,0 +1,209 @@
+@use "../../foundations/module" as *;
+
+// =========================================
+// p-company セクション
+// =========================================
+.p-company {
+  background: linear-gradient(90deg, #1f1f1f 0%, #2a2a2a 100%);
+  color: $color-white;
+  padding: 10rem 0;
+  text-align: center;
+  .l-inner {
+    max-width: 120rem;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+
+  .c-section-catch {
+    text-align: center;
+    display: block;
+    margin-top: -3rem;
+    @include media("mobile") {
+      margin-top: 0rem;
+      font-size: 3.2rem;
+    }
+  }
+
+  &__heading.matrix.js-matrix.is-animated {
+    text-align: left;
+  }
+
+  &__l-inner {
+    text-align: right;
+  }
+
+  &__l-inner--narrow {
+    text-align: right;
+
+    @include media("mobile") {
+      text-align: right;
+    }
+  }
+
+  &__table {
+    margin: 0 auto;
+    text-align: left;
+  }
+
+  &__row {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 1.6rem 0;
+    border-top: 1px solid $color-white;
+
+    &:last-child {
+      border-bottom: 1px solid $color-white;
+    }
+  }
+
+  &__label {
+    width: 40%;
+    font-weight: 700;
+    font-size: 2rem;
+    padding-right: 1rem;
+    line-height: 2;
+    text-align: center;
+  }
+
+  &__data {
+    width: 60%;
+    font-size: 1.8rem;
+    line-height: 2;
+  }
+
+  &__list {
+    li {
+      line-height: 2;
+
+      @include media("mobile") {
+        text-align: left;
+        display: inline-block;
+      }
+    }
+  }
+
+  &__list-li {
+    @include media("mobile") {
+      width: 100%;
+      margin: 0 auto;
+    }
+  }
+
+  &__button {
+    display: inline-block;
+    text-align: center;
+    margin: 4rem auto 0;
+  }
+
+  @include media("mobile") {
+    padding:1.5rem 0;
+
+    &__label,
+    &__data {
+      width: 100%;
+      font-size: 1.4rem;
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+
+    &__row {
+      flex-direction: column;
+    }
+  }
+}
+
+// =========================================
+// p-members
+// =========================================
+.p-members {
+  margin-top: 6rem;
+  padding: 0;
+  text-align: center;
+  color: $color-white;
+
+  &__lead {
+    font-size: clamp(1.8rem, 3vw, 3.2rem);
+    font-weight: 700;
+    margin-bottom: 3rem;
+  }
+
+  &__list {
+    display: flex;
+    gap: 3rem;
+    justify-content: center;
+    flex-wrap: wrap;
+
+    @include media("mobile") {
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+
+  &__item {
+    background: $color-white;
+    color: $color-black;
+    padding: 4rem;
+    border-radius: 0.8rem;
+    max-width: 45%;
+    text-align: left;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+
+    @include media("mobile") {
+      max-width: 100%;
+      padding: 4rem 1rem;
+      text-align: justify;
+    }
+  }
+
+  &__header {
+    width: 90%;
+    margin: 0 auto 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 1rem;
+
+    @include media("content") {
+      flex-direction: column;
+    }
+  }
+
+  &__name {
+    font-size: 3.2rem;
+    font-weight: 700;
+    @include media("mobile") {
+      font-size: 2.2rem;
+    }
+    .p-members__role {
+      font-size: 1.6rem;
+      font-weight: 500;
+      margin-left: 1rem;
+    }
+  }
+
+  &__role {
+    font-size: 2.4rem;
+    font-weight: 700;
+
+    @include media("content") {
+      display: block;
+      margin: 0 0 0 auto;
+      font-size: 1.8rem;
+    }
+    @include media("mobile") {
+      font-size: 1.8rem;
+    }
+  }
+
+  &__text-first {
+    border-top: 1px solid;
+  }
+
+  &__text {
+    // font-size: 1.6rem;
+    // line-height: 1.6;
+    padding-top: 1rem;
+    // text-align: justify;
+  }
+}

@@ -1,0 +1,397 @@
+@use "../../foundations/module" as *;
+// =========================================
+// p-strength（TOPページ用）
+// =========================================
+.p-strength {
+  position: relative;
+  overflow: hidden;
+  padding: clamp(8rem, 10vw, 14rem) 0;
+  color: $color-white;
+  background: linear-gradient(90deg, #1f1f1f 0%, #2a2a2a 100%);
+
+  @include media("mobile") {
+    padding: 8rem 0 6rem;
+  }
+
+  &__heading {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  &__heading-wrap {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+
+  &__heading-text {
+    position: absolute;
+    top: 50%;
+    right: 15%;
+    transform: translateY(-50%);
+    margin: 0;
+    font-size: clamp(7rem, 11vw, 14rem);
+    font-weight: 900;
+    line-height: 0.8;
+    letter-spacing: -0.03em;
+    color: $color-gray-mid;
+    text-align: right;
+    white-space: nowrap;
+    z-index: 1;
+
+    @include media("mobile") {
+      top: 2.4rem;
+      right: 1.6rem;
+      transform: none;
+      font-size: clamp(4.8rem, 17vw, 7rem);
+      line-height: 0.86;
+      white-space: normal;
+    }
+  }
+
+  .l-inner {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 120rem;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    min-height: 60vh;
+
+    @include media("mobile") {
+      margin: 0 auto;
+      padding: 0 1.6rem;
+    }
+  }
+
+  &__body {
+    width: min(100%, 62rem);
+    text-align: right;
+
+    @include media("mobile") {
+      width: 100%;
+      padding-top: 10rem;
+    }
+  }
+
+  &__body-left {
+    width: 100%;
+  }
+
+  &__sublead {
+    margin: 0;
+    font-size: clamp(2.2rem, 2.8vw, 3.2rem);
+    font-weight: 700;
+    line-height: 1.7;
+    letter-spacing: 0.04em;
+    color: $color-white;
+    text-align: right;
+
+    @include media("mobile") {
+      font-size: 1.8rem;
+      line-height: 1.65;
+    }
+  }
+
+  &__button {
+    display: inline-flex;
+    justify-content: flex-end;
+    margin-top: 3.2rem;
+
+    @include media("mobile") {
+      margin-top: 2.4rem;
+    }
+  }
+}
+
+
+// ========================================
+// Strength Page（下層ページ専用）
+// ========================================
+.p-strength-page {
+  position: relative;
+  color: $color-white;
+  background-color: $color-black;
+  overflow: visible;
+
+  &.is-dark {
+    background-color: $color-black;
+  }
+
+  &__bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    background: linear-gradient(
+      90deg,
+      #171717 0%,
+      #212121 32%,
+      #1b1b1b 60%,
+      #202020 100%
+    );
+    pointer-events: none;
+  }
+
+  // ----------------------------------------
+  // intro: 1カラム縦積み
+  // ----------------------------------------
+  &__intro {
+    position: relative;
+    padding: 16rem 0 8rem;
+
+    @include media("mobile") {
+      padding: 12rem 0 6rem;
+    }
+
+    .l-inner {
+      display: flex;
+      flex-direction: column;
+      gap: 4rem;
+    }
+  }
+
+  &__heading {
+    position: relative;
+    z-index: 5;
+  }
+
+  &__title.c-heading {
+    margin-top: 0;
+    margin-bottom: 4.4rem;
+    font-size: clamp(6rem, 10vw, 14rem);
+    line-height: 0.88;
+    letter-spacing: -0.05em;
+
+    @include media("mobile") {
+      margin-bottom: 2rem;
+      font-size: clamp(4.8rem, 15vw, 7rem);
+      line-height: 0.9;
+    }
+  }
+
+  &__sublead.c-section-sublead {
+    margin-bottom: 0;
+    font-size: clamp(1.8rem, 2.2vw, 2.8rem);
+    line-height: 1.5;
+    letter-spacing: -0.01em;
+
+    @include media("mobile") {
+      font-size: 1.8rem;
+      line-height: 1.5;
+    }
+  }
+
+  // ----------------------------------------
+  // リード文
+  // ----------------------------------------
+  &__lead {
+    color: $color-white;
+    max-width: 100%;
+
+    p {
+      margin: 0;
+      font-size: clamp(1.3rem, 1.4vw, 1.5rem);
+      line-height: 1.9;
+      letter-spacing: 0.02em;
+    }
+
+    p + p {
+      margin-top: 1.2rem;
+    }
+
+    @include media("mobile") {
+      p {
+        font-size: 1.4rem;
+      }
+    }
+  }
+
+  // ----------------------------------------
+  // カードエリア
+  // ----------------------------------------
+  &__cards {
+    position: relative;
+    z-index: 11;
+    width: 100%;
+    padding: 0 0 16rem;
+
+    @include media("mobile") {
+      padding: 0 0 8rem;
+    }
+
+    .l-inner {
+      display: block;
+    }
+  }
+
+  // ----------------------------------------
+  // 横4列グリッド
+  // ----------------------------------------
+  &__cards-inner {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+
+    @include media("mobile") {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.2rem;
+    }
+  }
+
+  // ----------------------------------------
+  // Backボタン
+  // ----------------------------------------
+  &__back {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 8rem;
+    padding-top: 2rem;
+    padding-right: 5rem;
+    opacity: 0;
+    transform: translateY(2rem);
+    transition:
+      opacity 0.8s ease,
+      transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+
+    &.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @include media("mobile") {
+      margin-top: 6rem;
+      padding-right: 2rem;
+    }
+  }
+
+  .l-inner {
+    width: 100%;
+    margin-right: auto;
+  }
+}
+
+// ----------------------------------------
+// SCROLLライン流れるアニメーション
+// ----------------------------------------
+@keyframes scrollLineDown {
+  0% {
+    top: -100%;
+  }
+  100% {
+    top: 100%;
+  }
+}
+
+
+// ========================================
+// Strength Page Card
+// ========================================
+.p-strength-page-card {
+  position: relative;
+  opacity: 0;
+  filter: blur(8px);
+  transform: translateY(4rem);
+  transition:
+    opacity 0.9s ease,
+    transform 1s cubic-bezier(0.22, 1, 0.36, 1),
+    filter 0.9s ease;
+
+  &:nth-child(1) { transition-delay: 0.05s; }
+  &:nth-child(2) { transition-delay: 0.2s; }
+  &:nth-child(3) { transition-delay: 0.35s; }
+  &:nth-child(4) { transition-delay: 0.5s; }
+
+  &.is-visible {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateY(0);
+  }
+
+  &__link {
+    display: block;
+    color: inherit;
+    text-decoration: none;
+  }
+
+  &__figure {
+    position: relative;
+    margin: 0;
+    overflow: hidden;
+    box-shadow:
+      0 0.4rem 1.2rem rgba(0, 0, 0, 0.06),
+      0 0.8rem 2.4rem rgba(0, 0, 0, 0.12);
+  }
+
+  img {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 5 / 3;
+    object-fit: cover;
+    transition:
+      filter 0.35s ease,
+      transform 0.35s ease;
+  }
+
+  &__caption {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.45);
+    opacity: 0;
+    transition: opacity 0.35s ease;
+
+    @include media("mobile") {
+      inset: auto 0 0;
+      top: auto;
+      opacity: 1;
+      padding-bottom: 1.2rem;
+      background: linear-gradient(
+        to top,
+        rgba(0, 0, 0, 0.82) 0%,
+        rgba(0, 0, 0, 0) 100%
+      );
+    }
+  }
+
+  &__caption-text {
+    margin: 0;
+    padding: 1.6rem;
+    font-size: 1.4rem;
+    font-weight: 700;
+    line-height: 1.65;
+    letter-spacing: 0.03em;
+    color: #fff;
+    text-align: center;
+    transform: translateY(1rem);
+    transition: transform 0.35s ease;
+
+    @include media("mobile") {
+      transform: none;
+      font-size: 1.1rem;
+      line-height: 1.5;
+      padding: 1rem;
+    }
+  }
+
+  &:hover,
+  &:focus-within {
+    img {
+      filter: brightness(0.5);
+      transform: scale(1.03);
+    }
+
+    .p-strength-page-card__caption {
+      opacity: 1;
+    }
+
+    .p-strength-page-card__caption-text {
+      transform: translateY(0);
+    }
+  }
+}

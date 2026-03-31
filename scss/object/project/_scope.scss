@@ -1,0 +1,289 @@
+@use "../../foundations/module" as *;
+
+// ============================================
+// p-scope
+// Scope of our Service セクション
+// ============================================
+
+.p-scope {
+  padding: clamp(4rem, calc(80 / 1440 * 100vw), 8rem) 0;
+  min-height: min(90vh, 92rem);
+  background: #f3f3f3;
+  overflow: hidden;
+
+  @include media("mobile") {
+    padding: 4rem 0.5rem;
+    min-height: auto;
+  }
+}
+
+.p-scope__lead {
+  margin-top: clamp(1.6rem, calc(24 / 1440 * 100vw), 2.4rem);
+
+  @include media("mobile") {
+    margin-top: 1.6rem;
+  }
+}
+
+// ============================================
+// p-scope-arrows
+// サポート範囲 矢印ステップ
+// ============================================
+
+$scope-arrow-colors: (
+  planning: #1a1a1a,
+  research: #4a4a4a,
+  action: #7a7a7a,
+  marketing: #a0a0a0,
+);
+
+$scope-arrow-count: 4;
+$arrow-point: clamp(2.8rem, calc(50 / 1440 * 100vw), 5rem); // シェブロンの尖り幅（PC）
+// SP: 尖りを少し大きくし、カード間は重ねずギャップで矢印が判読できるようにする
+$arrow-point-mobile: clamp(3rem, 9vw, 4.2rem);
+
+.p-scope-arrows {
+  display: flex;
+  align-items: stretch;
+  width: 100%;
+  margin-top: clamp(2.4rem, calc(40 / 1440 * 100vw), 4rem);
+
+  @include media("mobile") {
+    flex-direction: column;
+    // gap: 1.2rem;
+    margin-top: 2.4rem;
+  }
+}
+
+// --- 各矢印アイテム ---
+.p-scope-arrows__item {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex: 1 1 0;
+  min-width: 0;
+  min-height: clamp(14rem, min(calc(260 / 1440 * 100vw), calc(220 / 900 * 100vh)), 26rem);
+  padding:
+    clamp(1.6rem, min(calc(24 / 1440 * 100vw), calc(18 / 900 * 100vh)), 2.4rem)
+    clamp(1.2rem, calc(24 / 1440 * 100vw), 2.4rem)
+    clamp(1.6rem, min(calc(24 / 1440 * 100vw), calc(18 / 900 * 100vh)), 2.4rem)
+    clamp(1.6rem, calc(62 / 1440 * 100vw), 6.2rem);
+  color: $color-white;
+  text-align: center;
+  box-sizing: border-box;
+
+  // PC: clip-path でシェブロン（矢印）形状
+  clip-path: polygon(
+    0% 0%,
+    calc(100% - #{$arrow-point}) 0%,
+    100% 50%,
+    calc(100% - #{$arrow-point}) 100%,
+    0% 100%,
+    #{$arrow-point} 50%
+  );
+
+  // 2番目以降を左に重ねて隙間を詰める
+  & + & {
+    margin-left: calc(#{$arrow-point} * -1);
+
+    @include media("mobile") {
+      margin-left: 0;
+    }
+  }
+
+  // 最初の矢印は左端を直角にする
+  &:first-child {
+    clip-path: polygon(
+      0% 0%,
+      calc(100% - #{$arrow-point}) 0%,
+      100% 50%,
+      calc(100% - #{$arrow-point}) 100%,
+      0% 100%
+    );
+    padding-left: clamp(1.6rem, calc(24 / 1440 * 100vw), 2.4rem);
+
+    @include media("mobile") {
+      clip-path: polygon(
+        0% 0%,
+        100% 0%,
+        100% calc(100% - #{$arrow-point-mobile}),
+        50% 100%,
+        0% calc(100% - #{$arrow-point-mobile})
+      );
+    }
+  }
+
+  @include media("mobile") {
+    // SP: 各ステップを下向き矢印形状に（最後以外は先端が下）
+    clip-path: polygon(
+      0% 0%,
+      100% 0%,
+      100% calc(100% - #{$arrow-point-mobile}),
+      50% 100%,
+      0% calc(100% - #{$arrow-point-mobile})
+    );
+    min-height: auto;
+    padding: 1.6rem;
+    padding-bottom: calc(1.6rem + #{$arrow-point-mobile});
+
+    &:last-child {
+      clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
+      padding-bottom: 1.6rem;
+    }
+  }
+
+  // --- アニメーション ---
+  opacity: 0;
+  transform: translateX(-3rem);
+  transition:
+    opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+
+  .p-scope-arrows.is-visible & {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  @include media("mobile") {
+    transform: translateY(2.4rem);
+
+    .p-scope-arrows.is-visible & {
+      transform: translateY(0);
+    }
+  }
+
+  @for $i from 1 through $scope-arrow-count {
+    &:nth-child(#{$i}) {
+      transition-delay: #{($i - 1) * 0.3}s;
+    }
+  }
+
+  @each $name, $color in $scope-arrow-colors {
+    &--#{$name} {
+      background-color: $color;
+    }
+  }
+}
+
+// --- テキスト ---
+.p-scope-arrows__title-ja {
+  font-size: clamp(1.6rem, min(calc(22 / 1440 * 100vw), calc(20 / 900 * 100vh)), 2.2rem);
+  font-weight: 700;
+  line-height: 1.6;
+  margin-bottom: clamp(0.4rem, calc(8 / 1440 * 100vw), 0.8rem);
+  word-break: keep-all;
+  overflow-wrap: break-word;
+
+  @include media("mobile") {
+    font-size: clamp(1.6rem, calc(20 / 375 * 100vw), 2rem);
+  }
+}
+
+.p-scope-arrows__title-en {
+  font-size: clamp(1.4rem, min(calc(20 / 1440 * 100vw), calc(18 / 900 * 100vh)), 2rem);
+  font-weight: 700;
+  line-height: 1.4;
+  letter-spacing: 0.05em;
+  word-break: keep-all;
+  overflow-wrap: break-word;
+
+  @include media("mobile") {
+    font-size: 1.6rem;
+  }
+}
+
+p.p-scope__support-label {
+  font-size: clamp(1.6rem, min(calc(24 / 1440 * 100vw), calc(20 / 900 * 100vh)), 2.4rem);
+  font-weight: 700;
+  text-align: center;
+  border: 1px solid;
+  padding: clamp(0.8rem, calc(10 / 1440 * 100vw), 1rem) 0;
+}
+
+// ============================================
+// low height adjustment
+// 縦が低い画面でも比率を保ちながら収める
+// ============================================
+
+@media screen and (max-height: 820px) and (min-width: 768px) {
+  .p-scope {
+    padding: 5.6rem 0;
+    min-height: auto;
+  }
+
+  .p-scope-arrows {
+    margin-top: 3.2rem;
+  }
+
+  .p-scope-arrows__item {
+    min-height: 18rem;
+    padding:
+      1.8rem
+      1.6rem
+      1.8rem
+      4.8rem;
+  }
+
+  .p-scope-arrows__item:first-child {
+    padding-left: 1.8rem;
+  }
+
+  .p-scope-arrows__title-ja {
+    font-size: 1.8rem;
+    line-height: 1.5;
+  }
+
+  .p-scope-arrows__title-en {
+    font-size: 1.6rem;
+  }
+
+  p.p-scope__support-label {
+    font-size: 2rem;
+    padding: 0.8rem 0;
+  }
+}
+
+@media screen and (max-height: 700px) and (min-width: 768px) {
+  .p-scope {
+    padding: 4.8rem 0;
+  }
+
+  .p-scope__lead {
+    margin-top: 1.6rem;
+  }
+
+  .p-scope-arrows {
+    margin-top: 2.4rem;
+  }
+
+  .p-scope-arrows__item {
+    min-height: 15rem;
+    padding:
+      1.4rem
+      1.2rem
+      1.4rem
+      4rem;
+  }
+
+  .p-scope-arrows__item:first-child {
+    padding-left: 1.4rem;
+  }
+
+  .p-scope-arrows__title-ja {
+    font-size: 1.6rem;
+    line-height: 1.4;
+    margin-bottom: 0.4rem;
+  }
+
+  .p-scope-arrows__title-en {
+    font-size: 1.4rem;
+    line-height: 1.3;
+  }
+
+  p.p-scope__support-label {
+    font-size: 1.8rem;
+    padding: 0.6rem 0;
+  }
+}

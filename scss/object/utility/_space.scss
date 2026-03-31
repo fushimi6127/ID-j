@@ -1,0 +1,243 @@
+@use "../../foundations/module" as *;
+
+// ------------------------------------------
+// 上下 margin・padding
+// ------------------------------------------
+.m_tb_40 {
+  margin-top: 4rem;
+  margin-bottom: 4rem;
+}
+
+.m_tb_80 {
+  margin-top: 8rem;
+  margin-bottom: 8rem;
+}
+
+.p_tb_40 {
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+}
+
+.p_tb_80 {
+  padding-top: 8rem;
+  padding-bottom: 8rem;
+}
+
+// ------------------------------------------
+// 下 margin
+// ------------------------------------------
+.mb_00 {
+  margin-bottom: 0 !important;
+}
+
+.mb_10 {
+  margin-bottom: 1rem;
+}
+
+.mb_16 {
+  margin-bottom: 1.6rem !important;
+}
+
+.mb_20 {
+  margin-bottom: 2rem;
+}
+
+.mb_30 {
+  margin-bottom: 3rem;
+}
+
+.mb_40 {
+  margin-bottom: 4rem;
+
+  @include media("mobile") {
+    margin-bottom: 2rem;
+  }
+}
+
+.mb_50 {
+  margin-bottom: 5rem;
+}
+
+.mb_60 {
+  margin-bottom: 6rem;
+}
+
+.mb_70 {
+  margin-bottom: 7rem;
+}
+
+.mb_80 {
+  margin-bottom: 8rem;
+}
+
+.mb_90 {
+  margin-bottom: 9rem;
+}
+
+.mb_100 {
+  margin-bottom: 10rem;
+}
+
+// ------------------------------------------
+// 上 margin
+// ------------------------------------------
+.mt_00 {
+  margin-top: 0 !important;
+}
+
+.mt_10 {
+  margin-top: 1rem;
+}
+
+.mt_16 {
+  margin-top: 1.6rem !important;
+}
+
+.mt_20 {
+  margin-top: 2rem;
+}
+
+.mt_30 {
+  margin-top: 3rem;
+}
+
+.mt_40 {
+  margin-top: 4rem;
+}
+
+.mt_50 {
+  margin-top: 5rem;
+
+  @include media("mobile") {
+    margin-top: 4rem;
+  }
+}
+
+.mt_60 {
+  margin-top: 6rem;
+}
+
+.mt_70 {
+  margin-top: 7rem;
+}
+
+.mt_80 {
+  margin-top: 8rem;
+}
+
+.mt_90 {
+  margin-top: 9rem;
+}
+
+.mt_100 {
+  margin-top: 10rem;
+}
+
+// ------------------------------------------
+// 下 padding
+// ------------------------------------------
+.pb_00 {
+  padding-bottom: 0 !important;
+}
+
+.pb_10 {
+  padding-bottom: 1rem;
+}
+
+.pb_20 {
+  padding-bottom: 2rem;
+}
+
+.pb_30 {
+  padding-bottom: 3rem;
+}
+
+.pb_40 {
+  padding-bottom: 4rem;
+}
+
+.pb_50 {
+  padding-bottom: 5rem;
+}
+
+.pb_60 {
+  padding-bottom: 6rem;
+}
+
+.pb_70 {
+  padding-bottom: 7rem;
+}
+
+.pb_80 {
+  padding-bottom: 8rem;
+}
+
+.pb_90 {
+  padding-bottom: 9rem;
+}
+
+.pb_100 {
+  padding-bottom: 10rem;
+}
+
+// ------------------------------------------
+// 上 padding
+// ------------------------------------------
+.pt_00 {
+  padding-top: 0 !important;
+}
+
+.pt_10 {
+  padding-top: 1rem;
+}
+
+.pt_20 {
+  padding-top: 2rem;
+}
+
+.pt_30 {
+  padding-top: 3rem;
+}
+
+.pt_40 {
+  padding-top: 4rem;
+}
+
+.pt_50 {
+  padding-top: 5rem;
+}
+
+.pt_60 {
+  padding-top: 6rem;
+}
+
+.pt_70 {
+  padding-top: 7rem;
+}
+
+.pt_80 {
+  padding-top: 8rem;
+
+  @include media("mobile") {
+    padding-top: 4rem;
+  }
+}
+
+.pt_90 {
+  padding-top: 9rem;
+}
+
+.pt_100 {
+  padding-top: 10rem;
+}
+
+// ------------------------------------------
+// 変則的なスペーシング
+// ------------------------------------------
+.bg-coverd-btn {
+  margin-top: -11rem;
+
+  @include media("mobile") {
+    margin-top: 0;
+  }
+}
