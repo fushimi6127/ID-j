@@ -854,6 +854,21 @@ $import-flow-arrow-depth: 5%; // SP：下向きシェブロンの先端の高さ
   }
 }
 
+.p-import-flow__cta {
+  display: flex;
+  justify-content: right;
+  margin-top: 4rem;
+
+  @include media("mobile") {
+    margin-top: 3.2rem;
+  }
+}
+
+.p-import-flow__cta-link {
+  text-decoration: none;
+  color: $color-black;
+}
+
 .p-import-why__body {
   @include media("mobile") {
   margin-top: 5rem;

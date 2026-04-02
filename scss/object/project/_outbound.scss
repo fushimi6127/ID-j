@@ -213,7 +213,7 @@
   &__stat-card {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-evenly;
     min-height: 16rem;
     padding: 3rem 2rem;
     text-align: center;
@@ -355,20 +355,9 @@
       row-gap: 3rem;
     }
 
-    // &__stats {
-    //   grid-template-columns: 1fr;
-    //   border-bottom: none;
-    // }
-
     &__stat-card {
       min-height: auto;
       padding: 2.4rem 1.2rem;
-      // border-right: none;
-      // border-bottom: 1px solid rgba(17, 17, 17, 0.08);
-
-      // &:last-child {
-      //   border-bottom: 1px solid rgba(17, 17, 17, 0.08);
-      // }
     }
 
     &__stat-number {
@@ -379,6 +368,10 @@
       margin-top: 1rem;
       font-size: 1.2rem;
       line-height: 1.5;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
 
     &__body {
@@ -478,7 +471,7 @@ $roadmap-text-dim: #666;
   // -----------------------------------------
   &__cell {
     background-color: $color-white;
-    padding: 4rem;
+    padding: 4rem 2rem;
     display: flex;
     flex-direction: column;
 
@@ -601,6 +594,21 @@ $roadmap-text-dim: #666;
     width: 100%;
     margin-top: 0;
     background-color: $txt-color;
+  }
+
+  &__cta {
+    display: flex;
+    justify-content: right;
+    margin-top: 4rem;
+
+    @include media("mobile") {
+      margin-top: 3.2rem;
+    }
+  }
+
+  &__cta-link {
+    text-decoration: none;
+    color: $txt-color;
   }
 }
 

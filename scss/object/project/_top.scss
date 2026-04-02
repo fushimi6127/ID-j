@@ -16,6 +16,10 @@
   justify-content: center;
   background: $color-white;
   overflow: hidden;
+
+  @include media("mobile") {
+    align-items: center;
+  }
 }
 
 .p-mainvisual__inner {
@@ -27,7 +31,7 @@
 
   @include media("mobile") {
     width: 100%;
-    padding: 0 2rem 6rem;
+    padding: 0 2rem;
   }
 }
 

@@ -181,6 +181,17 @@
     }
   }
 
+  // Our Service 親は遷移なし（ドロップダウンのみ）
+  &__nav-link--parent[role="button"] {
+    cursor: pointer;
+    border: none;
+    padding: 0;
+    margin: 0;
+    background: none;
+    font: inherit;
+    text-align: inherit;
+  }
+
   &.is-ready &__nav-link {
     transition: color 0.3s ease;
   }
@@ -223,6 +234,8 @@
     margin: 0;
     padding: 0.6rem 0;
     list-style: none;
+    // body.theme-dark の白テキスト継承を打ち切る（ドロップダウンは常に白背景＋黒文字）
+    color: $color-black;
     background-color: $color-white;
     border-radius: 0.4rem;
     box-shadow: 0 0.4rem 1.6rem rgba(0, 0, 0, 0.14);
@@ -245,6 +258,10 @@
     text-decoration: none;
     transition: background-color 0.2s ease;
 
+    &:visited {
+      color: $color-black;
+    }
+
     &:hover {
       background-color: rgba(0, 0, 0, 0.06);
     }
@@ -253,6 +270,12 @@
       outline: 2px solid $color-black;
       outline-offset: -2px;
     }
+  }
+
+  // is-dark 時も _base の a { color: inherit } より確実に黒を当てる
+  &.is-dark .l-header__nav-sub .l-header__nav-sublink,
+  &.is-dark .l-header__nav-sub .l-header__nav-sublink:visited {
+    color: $color-black;
   }
 
   // ----- SP: ダークパネル（英日2行・CLOSE・ロゴ・透かし） -----
@@ -354,6 +377,16 @@
 
     &:visited {
       color: #fff;
+    }
+
+    // Our Service 親（リンクではない）
+    &[role="button"] {
+      cursor: pointer;
+      border: none;
+      background: none;
+      font: inherit;
+      text-align: inherit;
+      width: 100%;
     }
   }
 

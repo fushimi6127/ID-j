@@ -43,18 +43,19 @@
                 <a href="../index.html#about" class="l-header__nav-link" data-cursor="About us">About us</a>
               </li>
               <li class="l-header__nav-item l-header__nav-item--has-sub">
-                <a
-                  href="../index.html#service"
+                <span
                   class="l-header__nav-link l-header__nav-link--parent"
                   data-cursor="Our Service"
                   aria-haspopup="true"
-                  >Our Service<span class="l-header__nav-caret" aria-hidden="true"></span></a>
+                  role="button"
+                  tabindex="0"
+                  >Our Service<span class="l-header__nav-caret" aria-hidden="true"></span></span>
                 <ul class="l-header__nav-sub" role="list">
                   <li>
-                    <a href="../inbound/inbound.html" class="l-header__nav-sublink" data-cursor="In-bound">インバウンド</a>
+                    <a href="../inbound/inbound.html" class="l-header__nav-sublink" data-cursor="In-bound">In-bound</a>
                   </li>
                   <li>
-                    <a href="../outbound/outbound.html" class="l-header__nav-sublink" data-cursor="Out-bound">アウトバウンド</a>
+                    <a href="../outbound/outbound.html" class="l-header__nav-sublink" data-cursor="Out-bound">Out-bound</a>
                   </li>
                   <li>
                     <a
@@ -63,7 +64,7 @@
                       target="_blank"
                       rel="noopener noreferrer"
                       data-cursor="Marketing Creative"
-                      >マーケティングクリエイティブ</a>
+                      >Marketing Creative</a>
                   </li>
                 </ul>
               </li>
@@ -71,10 +72,10 @@
                 <a href="../strength/strength.html" class="l-header__nav-link" data-cursor="Strength">Strength</a>
               </li>
               <li class="l-header__nav-item">
-                <a href="../index.html#cases" class="l-header__nav-link" data-cursor="Case examples">Case examples</a>
+                <a href="../case/case.html" class="l-header__nav-link" data-cursor="Case examples">Case examples</a>
               </li>
               <li class="l-header__nav-item">
-                <a href="#contact" class="l-header__nav-link" data-cursor="Contact">Contact</a>
+                <a href="../contact/contact.html" class="l-header__nav-link" data-cursor="Contact">Contact</a>
               </li>
             </ul>
           </nav>
@@ -111,10 +112,10 @@
                 </a>
               </li>
               <li class="l-header__nav-sp-item l-header__nav-sp-item--has-sub">
-                <a href="../index.html#service" class="l-header__nav-sp-link" data-cursor="Our Service">
+                <span class="l-header__nav-sp-link" data-cursor="Our Service" role="button" tabindex="0">
                   <span class="l-header__nav-sp-link-en">Our Service</span>
                   <span class="l-header__nav-sp-link-ja">ーサービス一覧</span>
-                </a>
+                </span>
                 <ul class="l-header__nav-sp-sub" role="list">
                   <li>
                     <a href="../inbound/inbound.html" class="l-header__nav-sp-link l-header__nav-sp-link--sub" data-cursor="In-bound">
@@ -149,19 +150,19 @@
                 </a>
               </li>
               <li>
-                <a href="../index.html#cases" class="l-header__nav-sp-link" data-cursor="Case examples">
+                <a href="../case/case.html" class="l-header__nav-sp-link" data-cursor="Case examples">
                   <span class="l-header__nav-sp-link-en">Case examples</span>
                   <span class="l-header__nav-sp-link-ja">ー事例紹介</span>
                 </a>
               </li>
               <li>
-                <a href="#contact" class="l-header__nav-sp-link" data-cursor="Contact">
+                <a href="../contact/contact.html" class="l-header__nav-sp-link" data-cursor="Contact">
                   <span class="l-header__nav-sp-link-en">Contact</span>
                   <span class="l-header__nav-sp-link-ja">ーお問い合わせ</span>
                 </a>
               </li>
               <li>
-                <a href="../policy.html" class="l-header__nav-sp-link" data-cursor="Policy">
+                <a href="../policy/policy.html" class="l-header__nav-sp-link" data-cursor="Policy">
                   <span class="l-header__nav-sp-link-en">Policy</span>
                   <span class="l-header__nav-sp-link-ja">ーポリシー</span>
                 </a>
@@ -184,124 +185,135 @@
     <section class="p-strength-page is-dark" id="strength">
       <div class="p-strength-page__bg" aria-hidden="true"></div>
 
-      <!-- イントロ：1カラム縦積み -->
       <div class="p-strength-page__intro">
         <div class="l-inner">
+          <div class="p-strength-page__intro-inner">
 
-          <div class="p-strength-page__heading c-heading-block c-heading-block--white c-heading-block--left matrix js-matrix">
-            <span class="matrix__wrap">
-              <h1 class="c-heading p-strength-page__title">
-                <span class="bgappearTrigger">Creative + Solution</span>
-              </h1>
-            </span>
+            <!-- 左カラム：見出し -->
+            <div class="p-strength-page__col-left">
+              <div class="p-strength-page__heading c-heading-block c-heading-block--white c-heading-block--left matrix js-matrix">
+                <span class="matrix__wrap">
+                  <h1 class="c-heading p-strength-page__title">
+                    <span class="bgappearTrigger">Creative<br>+<br>Solution</span>
+                  </h1>
+                </span>
 
-            <h2 class="c-section-sublead p-strength-page__sublead">
-              <span class="bgappearTrigger">
-                広告クリエイティブの企画力　現地 ID･J&amp;Co. の解決力が強みです
-              </span>
-            </h2>
+                <h2 class="c-section-sublead p-strength-page__sublead">
+                  <span class="bgappearTrigger">
+                    広告クリエイティブの企画力<br>
+                    現地 ID･J&amp;Co. の解決力が強みです
+                  </span>
+                </h2>
+              </div>
+            </div>
+
+            <!-- 右カラム：リード文 -->
+            <div class="p-strength-page__col-right">
+              <div class="c-heading-block__lead p-strength-page__lead">
+                <p>
+                  小売業、大学、行政機関、インフラ企業など様々な業界の広告クリエイティブに携わってきたアクトビューローの企画力・実行力。<br>
+                  インドネシア政府機関出身者による現地ID・Jイントネシアによる情報力・解決力。
+                </p>
+                <p>
+                  2つの力によってプロジェクトの企画立案から現地調査、最終プロモーションまで、一貫してサポートいたします。
+                </p>
+                <p>
+                  情報提供だけではなく、実現まで伴走できるのが私たちの強みです。
+                </p>
+              </div>
+
+              <div class="p-strength-page__scroll-btn" id="js-strength-body" aria-hidden="true">
+                <span class="p-strength-page__scroll-label">SCROLL</span>
+                <span class="p-strength-page__scroll-arrow"></span>
+              </div>
+            </div>
+
           </div>
-
-          <div class="c-heading-block__lead p-strength-page__lead" id="js-strength-body">
-            <p>
-              小売業、大学、行政機関、インフラ企業など様々な業界の広告クリエイティブに携わってきたアクトビューローの企画力・実行力。<br>
-              インドネシア政府機関出身者による現地ID・Jインドネシアによる情報力・解決力。
-            </p>
-            <p>
-              2つの力によってプロジェクトの企画立案から現地調査、最終プロモーションまで、一貫してサポートいたします。
-            </p>
-            <p>
-              情報提供だけではなく、実現まで伴走できるのが私たちの強みです。
-            </p>
-          </div>
-
         </div>
       </div>
 
-      <!-- カードエリア -->
       <div class="p-strength-page__cards" id="js-strength-cards">
-        <div class="l-inner">
-          <div class="p-strength-page__cards-inner">
+        <div class="p-strength-page__cards-inner">
 
-            <article class="p-strength-page-card js-strength-card" data-cursor="VIEW">
-              <a href="#" class="p-strength-page-card__link" aria-label="スラバヤでの商談会と連携してのビジネスマッチングの開催">
-                <figure class="p-strength-page-card__figure">
-                  <img
-                    src="../img/project/strength/Strength1.png"
-                    alt="スラバヤでの商談会と連携してのビジネスマッチングの開催"
-                    width="520"
-                    height="390"
-                    loading="lazy"
-                  >
-                  <figcaption class="p-strength-page-card__caption">
-                    <p class="p-strength-page-card__caption-text">
-                      スラバヤでの商談会と連携してのビジネスマッチングの開催
-                    </p>
-                  </figcaption>
-                </figure>
-              </a>
-            </article>
+          <article class="p-strength-page-card p-strength-page-card--right js-strength-card" data-cursor="VIEW">
+            <a href="#" class="p-strength-page-card__link" aria-label="スラバヤでの商談会と連携してのビジネスマッチングの開催">
+              <figure class="p-strength-page-card__figure">
+                <img
+                  src="../img/project/strength/Strength1.png"
+                  alt="スラバヤでの商談会と連携してのビジネスマッチングの開催"
+                  width="520"
+                  height="390"
+                  loading="lazy"
+                >
+                <figcaption class="p-strength-page-card__caption">
+                  <p class="p-strength-page-card__caption-text">
+                    スラバヤでの商談会と連携してのビジネスマッチングの開催
+                  </p>
+                </figcaption>
+              </figure>
+            </a>
+          </article>
 
-            <article class="p-strength-page-card js-strength-card" data-cursor="VIEW">
-              <a href="#" class="p-strength-page-card__link" aria-label="クリニックの視察と連携してのビジネスマッチングを開催">
-                <figure class="p-strength-page-card__figure">
-                  <img
-                    src="../img/project/strength/Strength2.png"
-                    alt="クリニックの視察と連携してのビジネスマッチングを開催"
-                    width="480"
-                    height="360"
-                    loading="lazy"
-                  >
-                  <figcaption class="p-strength-page-card__caption">
-                    <p class="p-strength-page-card__caption-text">
-                      クリニックの視察と連携してのビジネスマッチングを開催
-                    </p>
-                  </figcaption>
-                </figure>
-              </a>
-            </article>
+          <article class="p-strength-page-card p-strength-page-card--left p-strength-page-card--small js-strength-card" data-cursor="VIEW">
+            <a href="#" class="p-strength-page-card__link" aria-label="クリニックの視察と連携してのビジネスマッチングを開催">
+              <figure class="p-strength-page-card__figure">
+                <img
+                  src="../img/project/strength/Strength2.png"
+                  alt="クリニックの視察と連携してのビジネスマッチングを開催"
+                  width="480"
+                  height="360"
+                  loading="lazy"
+                >
+                <figcaption class="p-strength-page-card__caption">
+                  <p class="p-strength-page-card__caption-text">
+                    クリニックの視察と連携してのビジネスマッチングを開催
+                  </p>
+                </figcaption>
+              </figure>
+            </a>
+          </article>
 
-            <article class="p-strength-page-card js-strength-card" data-cursor="VIEW">
-              <a href="#" class="p-strength-page-card__link" aria-label="第39回インドネシアトレードエキスポにてグレンジャー市長より感謝状を受領">
-                <figure class="p-strength-page-card__figure">
-                  <img
-                    src="../img/project/strength/Strength3.jpg"
-                    alt="第39回インドネシアトレードエキスポにてグレンジャー市長より感謝状を受領"
-                    width="360"
-                    height="420"
-                    loading="lazy"
-                  >
-                  <figcaption class="p-strength-page-card__caption">
-                    <p class="p-strength-page-card__caption-text">
-                      第39回インドネシアトレードエキスポにてグレンジャー市長より感謝状を受領
-                    </p>
-                  </figcaption>
-                </figure>
-              </a>
-            </article>
+          <article class="p-strength-page-card p-strength-page-card--right p-strength-page-card--small js-strength-card" data-cursor="VIEW">
+            <a href="#" class="p-strength-page-card__link" aria-label="第39回インドネシアトレードエキスポにてグレンジャー市長より感謝状を受領">
+              <figure class="p-strength-page-card__figure">
+                <img
+                  src="../img/project/strength/Strength3.jpg"
+                  alt="第39回インドネシアトレードエキスポにてグレンジャー市長より感謝状を受領"
+                  width="360"
+                  height="420"
+                  loading="lazy"
+                >
+                <figcaption class="p-strength-page-card__caption">
+                  <p class="p-strength-page-card__caption-text">
+                    第39回インドネシアトレードエキスポにてグレンジャー市長より感謝状を受領
+                  </p>
+                </figcaption>
+              </figure>
+            </a>
+          </article>
 
-            <article class="p-strength-page-card js-strength-card" data-cursor="VIEW">
-              <a href="#" class="p-strength-page-card__link" aria-label="第37回インドネシアトレードエキスポにてインドネシア総領事のDidi Sumedila氏から感謝状を受領">
-                <figure class="p-strength-page-card__figure">
-                  <img
-                    src="../img/project/strength/Strength4.jpg"
-                    alt="第37回インドネシアトレードエキスポにてインドネシア総領事のDidi Sumedila氏から感謝状を受領"
-                    width="520"
-                    height="390"
-                    loading="lazy"
-                  >
-                  <figcaption class="p-strength-page-card__caption">
-                    <p class="p-strength-page-card__caption-text">
-                      第37回インドネシアトレードエキスポにてインドネシア総領事のDidi Sumedila氏から感謝状を受領
-                    </p>
-                  </figcaption>
-                </figure>
-              </a>
-            </article>
+          <article class="p-strength-page-card p-strength-page-card--left js-strength-card" data-cursor="VIEW">
+            <a href="#" class="p-strength-page-card__link" aria-label="第37回インドネシアトレードエキスポにてインドネシア総領事のDidi Sumedila氏から感謝状を受領">
+              <figure class="p-strength-page-card__figure">
+                <img
+                  src="../img/project/strength/Strength4.jpg"
+                  alt="第37回インドネシアトレードエキスポにてインドネシア総領事のDidi Sumedila氏から感謝状を受領"
+                  width="520"
+                  height="390"
+                  loading="lazy"
+                >
+                <figcaption class="p-strength-page-card__caption">
+                  <p class="p-strength-page-card__caption-text">
+                    第37回インドネシアトレードエキスポにてインドネシア総領事のDidi Sumedila氏から感謝状を受領
+                  </p>
+                </figcaption>
+              </figure>
+            </a>
+          </article>
 
-          </div><!-- /.p-strength-page__cards-inner -->
-        </div><!-- /.l-inner -->
+        </div><!-- /.p-strength-page__cards-inner -->
 
+        <!-- Backボタン：最後のカードのtransitionend後にJS経由で is-visible 付与 -->
         <div class="p-strength-page__back" id="js-strength-back" aria-hidden="true">
           <a class="button-white p-about__button" href="../index.html#strength">
             <span class="button-white__label" data-cursor="Back">Back</span>
@@ -349,7 +361,7 @@
                   <a href="../index.html#cases" class="l-footer__nav-link" data-cursor="Case examples">Case examples</a>
                 </li>
                 <li class="l-footer__nav-item">
-                  <a href="../index.html#contact" class="l-footer__nav-link" data-cursor="Contact">Contact</a>
+                  <a href="../contact/contact.html" class="l-footer__nav-link" data-cursor="Contact">Contact</a>
                 </li>
               </ul>
             </nav>
@@ -357,7 +369,7 @@
             <div class="l-footer__subnav">
               <ul class="l-footer__subnav-list">
                 <li class="l-footer__subnav-item">
-                  <a href="../policy.html" class="l-footer__subnav-link" data-cursor="Policy">Policy</a>
+                  <a href="../policy/policy.html" class="l-footer__subnav-link" data-cursor="Policy">Policy</a>
                 </li>
                 <li class="l-footer__subnav-item">
                    <a href="../company/company.html"  class="l-footer__subnav-link" data-cursor="Company">Company</a>
@@ -418,19 +430,5 @@
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
   <script src="../js/common.js"></script>
-  <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      document.querySelectorAll(".js-strength-card").forEach(function (card) {
-        card.classList.add("is-visible");
-      });
-      var backBtn = document.getElementById("js-strength-back");
-      if (backBtn) {
-        setTimeout(function () {
-          backBtn.classList.add("is-visible");
-          backBtn.removeAttribute("aria-hidden");
-        }, 1600);
-      }
-    });
-  </script>
 </body>
 </html>

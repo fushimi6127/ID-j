@@ -11,7 +11,7 @@ $p-works-yellow: #f2cf00;
 
 .p-works {
   position: relative;
-  padding: 8rem 0 0;
+  padding: 15rem 0 0;
   background-color: $color-white;
   overflow: visible;
 
@@ -92,7 +92,7 @@ $p-works-yellow: #f2cf00;
 .p-works__card-img {
   position: relative;
   margin: 0;
-  height: 60vh;
+  height: 70vh;
   overflow: hidden;
 
   @include media("mobile") {

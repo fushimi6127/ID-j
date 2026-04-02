@@ -9,8 +9,9 @@ document.addEventListener('DOMContentLoaded', function () {
   if (!page) return;
 
   const paginationBtns = page.querySelectorAll('.js-case-page-pagination-btn');
-  const caseItems = page.querySelectorAll('.js-case-page-item');
-  const bodyItems = page.querySelectorAll('.js-case-page-body');
+  const caseItems      = page.querySelectorAll('.js-case-page-item');
+  const bodyItems      = page.querySelectorAll('.js-case-page-body');
+  const thumbBtns      = page.querySelectorAll('.js-case-thumb-btn'); // 追加
 
   const SLIDE_INTERVAL = 4000;
   let autoSlideTimer = null;
@@ -73,9 +74,21 @@ document.addEventListener('DOMContentLoaded', function () {
       btn.classList.toggle('is-active', isTarget);
       btn.setAttribute('aria-pressed', isTarget ? 'true' : 'false');
     });
+
+    // サムネイルのis-active更新（現在表示中ケースをdim）
+    thumbBtns.forEach(function (btn) {
+      btn.classList.toggle('is-active', btn.dataset.case === caseId);
+    });
   }
 
   paginationBtns.forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      activateCase(btn.dataset.case);
+    });
+  });
+
+  // サムネイルクリックでケース切り替え
+  thumbBtns.forEach(function (btn) {
     btn.addEventListener('click', function () {
       activateCase(btn.dataset.case);
     });
@@ -138,6 +151,10 @@ document.addEventListener('DOMContentLoaded', function () {
     const initialActiveItem = page.querySelector('.js-case-page-item.is-active');
     if (initialActiveItem) {
       startAutoSlide(initialActiveItem);
+      // 初期サムネイルのis-activeも設定
+      thumbBtns.forEach(function (btn) {
+        btn.classList.toggle('is-active', btn.dataset.case === initialActiveItem.id);
+      });
     }
   }
 });

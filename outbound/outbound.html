@@ -52,12 +52,13 @@
                 <a href="../index.html#about" class="l-header__nav-link" data-cursor="About us">About us</a>
               </li>
               <li class="l-header__nav-item l-header__nav-item--has-sub">
-                <a
-                  href="../index.html#service"
+                <span
                   class="l-header__nav-link l-header__nav-link--parent"
                   data-cursor="Our Service"
                   aria-haspopup="true"
-                  >Our Service<span class="l-header__nav-caret" aria-hidden="true"></span></a>
+                  role="button"
+                  tabindex="0"
+                  >Our Service<span class="l-header__nav-caret" aria-hidden="true"></span></span>
                 <ul class="l-header__nav-sub" role="list">
                   <li>
                     <a href="../inbound/inbound.html" class="l-header__nav-sublink" data-cursor="In-bound">In-bound</a>
@@ -83,7 +84,7 @@
                 <a href="../case/case.html" class="l-header__nav-link" data-cursor="Case examples">Case examples</a>
               </li>
               <li class="l-header__nav-item">
-                <a href="../index.html#contact" class="l-header__nav-link" data-cursor="Contact">Contact</a>
+                <a href="../contact/contact.html" class="l-header__nav-link" data-cursor="Contact">Contact</a>
               </li>
             </ul>
           </nav>
@@ -116,10 +117,10 @@
                 </a>ー
               </li>
               <li class="l-header__nav-sp-item l-header__nav-sp-item--has-sub">
-                <a href="../index.html#service" class="l-header__nav-sp-link" data-cursor="Our Service">
+                <span class="l-header__nav-sp-link" data-cursor="Our Service" role="button" tabindex="0">
                   <span class="l-header__nav-sp-link-en">Our Service</span>
                   <span class="l-header__nav-sp-link-ja">ーサービス一覧</span>
-                </a>
+                </span>
                 <ul class="l-header__nav-sp-sub" role="list">
                   <li>
                     <a href="../inbound/inbound.html" class="l-header__nav-sp-link l-header__nav-sp-link--sub" data-cursor="In-bound">
@@ -160,13 +161,13 @@
                 </a>
               </li>
               <li>
-                <a href="../index.html#contact" class="l-header__nav-sp-link" data-cursor="Contact">
+                <a href="../contact/contact.html" class="l-header__nav-sp-link" data-cursor="Contact">
                   <span class="l-header__nav-sp-link-en">Contact</span>
                   <span class="l-header__nav-sp-link-ja">ーお問い合わせ</span>
                 </a>
               </li>
               <li>
-                <a href="../policy.html" class="l-header__nav-sp-link" data-cursor="Policy">
+                <a href="../policy/policy.html" class="l-header__nav-sp-link" data-cursor="Policy">
                   <span class="l-header__nav-sp-link-en">Policy</span>
                   <span class="l-header__nav-sp-link-ja">ーポリシー</span>
                 </a>
@@ -425,6 +426,16 @@
             </div>
 
             <div class="p-roadmap__bottom-bar"></div>
+
+            <div class="p-roadmap__cta">
+              <a
+                href="../case/case.html"
+                class="button-black p-roadmap__cta-link"
+                data-cursor="Case examples"
+              >
+                <span class="button-black__label">Case examples</span>
+              </a>
+            </div>
           </div>
         </section>
       </main>
@@ -457,7 +468,7 @@
                   <a href="../case/case.html" class="l-footer__nav-link" data-cursor="Case examples">Case examples</a>
                 </li>
                 <li class="l-footer__nav-item">
-                  <a href="../index.html#contact" class="l-footer__nav-link" data-cursor="Contact">Contact</a>
+                  <a href="../contact/contact.html" class="l-footer__nav-link" data-cursor="Contact">Contact</a>
                 </li>
               </ul>
             </nav>
@@ -465,7 +476,7 @@
             <div class="l-footer__subnav">
               <ul class="l-footer__subnav-list">
                 <li class="l-footer__subnav-item">
-                  <a href="../policy.html" class="l-footer__subnav-link" data-cursor="Policy">Policy</a>
+                  <a href="../policy/policy.html" class="l-footer__subnav-link" data-cursor="Policy">Policy</a>
                 </li>
                 <li class="l-footer__subnav-item">
                    <a href="../company/company.html"  class="l-footer__subnav-link" data-cursor="Company">Company</a>
